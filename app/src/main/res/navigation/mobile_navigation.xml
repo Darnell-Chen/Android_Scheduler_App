@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.cs2340proj1.ui.home.HomeFragment"
+        android:name="com.example.cs2340proj1.ui.courses.CoursesFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_courses" />
 
     <fragment
         android:id="@+id/navigation_dashboard"

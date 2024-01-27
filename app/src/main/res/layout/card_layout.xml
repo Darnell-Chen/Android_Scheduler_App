@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="6dp">
+
+        <TextView
+            android:id="@+id/courseSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            android:textSize="15sp"
+            android:text="@string/cardFiller" />
+
+        <TextView
+            android:id="@+id/professorName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cardFiller" />
+
+        <TextView
+            android:id="@+id/classLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cardFiller" />
+
+        <TextView
+            android:id="@+id/classDays"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cardFiller" />
+
+        <EditText
+            android:id="@+id/classDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
