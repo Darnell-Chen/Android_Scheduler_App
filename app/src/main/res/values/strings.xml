@@ -7,4 +7,18 @@
     <string name="save_card_editor">Save</string>
     <string name="class_schedule">Class Schedule</string>
     <string name="todo_list">To-Do List</string>
+    <string name="professorCard">Professor</string>
+    <string name="courseCard">Course</string>
+    <string name="monday_String">Mon</string>
+    <string name="tuesday_String">Tue</string>
+    <string name="wednesday_String">Wed</string>
+    <string name="thursday_String">Thur</string>
+    <string name="friday_String">Fri</string>
+    <string name="daysOfWeekCard">Days of the Week</string>
+    <string name="timeCard">Time</string>
+    <string name="locationCard">Location</string>
+    <string name="course_time_hint">Course Time</string>
+    <string name="course_location_hint">Class Location</string>
+    <string name="course_name_hint">Course Abbreviation</string>
+    <string name="course_professor_hint">Course Professor</string>
 </resources>

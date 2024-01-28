@@ -1,36 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="20dp"
     android:backgroundTint="@color/black">
 
-    <EditText
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/courseInputText"
+        android:labelFor="@+id/courseInputEdit"
         android:layout_height="wrap_content"
-        android:autofillHints="Course Name" />
+        android:layout_width="wrap_content"
+        android:text="@string/courseCard"/>
 
     <EditText
+        android:id="@+id/courseInputEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints="Course Professor" />
+        android:hint="@string/course_name_hint"
+        android:autofillHints="CS2340"
+        android:inputType="textCapCharacters"/>
+
+    <TextView
+        android:id="@+id/professorInputText"
+        android:labelFor="@+id/professorInputEdit"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/professorCard" />
 
     <EditText
+        android:id="@+id/professorInputEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints="Course Time" />
+        android:autofillHints="Feijo Garcia"
+        android:hint="@string/course_professor_hint"/>
+
+    <TextView
+        android:paddingTop="20dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/daysOfWeekCard"/>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="30dp"
+        tools:ignore="UseSwitchCompatOrMaterialXml">
+
+        <Switch
+            android:id="@+id/mon_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/monday_String" />
+
+        <Switch
+            android:id="@+id/tue_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tuesday_String" />
+
+        <Switch
+            android:id="@+id/wed_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wednesday_String" />
+
+        <Switch
+            android:id="@+id/thur_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/thursday_String" />
+
+        <Switch
+            android:id="@+id/fri_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/friday_String" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/timeInputText"
+        android:labelFor="@id/timeInputEdit"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/timeCard"/>
 
     <EditText
+        android:id="@+id/timeInputEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints="Course Name" />
+        android:hint="@string/course_time_hint" />
+
+    <TextView
+        android:id="@+id/locationInputText"
+        android:labelFor="@id/locationInputEdit"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/locationCard"/>
+
 
     <EditText
+        android:id="@+id/locationInputEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints="Course Name"
-        android:text="filler for editor"/>
+        android:hint="@string/course_location_hint"
+        android:inputType="text"/>
+
 
     <Button
         android:id="@+id/button"
@@ -38,5 +117,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/save_card_editor" />
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>
