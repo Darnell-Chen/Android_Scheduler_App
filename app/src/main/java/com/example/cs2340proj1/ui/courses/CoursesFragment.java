@@ -29,12 +29,13 @@ public class CoursesFragment extends Fragment {
         View root = binding.getRoot();
 
         FloatingActionButton addCourseButton = root.findViewById(R.id.add_course_button);
-        addCourseButton.setOnClickListener(new View.OnClickListener()){
+        addCourseButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void OnClick(View view) {
-
+            public void onClick(View v) {
+                // Just filler until I find out what to do.
+                System.out.println("filler");
             }
-        }
+        });
 
         // This is the object that accesses the recyclerview in our course layout
         RecyclerView courseRecycler = binding.coursesRecyclerview;
