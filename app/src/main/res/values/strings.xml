@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">CS2340 Proj 1</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_class_schedule">Class Schedule</string>
+    <string name="title_todo_list">To-Do List</string>
     <string name="title_notifications">Notifications</string>
     <string name="cardFiller">TextView</string>
     <string name="save_card_editor">Save</string>
+    <string name="class_schedule">Class Schedule</string>
+    <string name="todo_list">To-Do List</string>
 </resources>
