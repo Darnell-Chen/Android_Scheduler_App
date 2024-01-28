@@ -24,7 +24,7 @@ public class TodoListFragment extends Fragment {
         binding = FragmentTodoListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
+        final TextView textView = binding.tasksText;
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }

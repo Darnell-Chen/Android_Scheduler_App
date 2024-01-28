@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/class_schedule_dashboard"
+        android:id="@+id/class_schedule"
         android:icon="@drawable/ic_calendar_month_24"
         android:title="@string/class_schedule" />
 
     <item
-        android:id="@+id/todo_list_dashboard"
+        android:id="@+id/todo_list"
         android:icon="@drawable/ic_checklist_24"
         android:title="@string/todo_list" />
 
