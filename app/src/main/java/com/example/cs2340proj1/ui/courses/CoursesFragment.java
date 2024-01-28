@@ -7,22 +7,41 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cs2340proj1.R;
 import com.example.cs2340proj1.databinding.FragmentCoursesBinding;
-import com.example.cs2340proj1.ui.dashboard.DashboardViewModel;
+import com.example.cs2340proj1.ui.CourseAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class CoursesFragment extends Fragment {
 
+    // Note: xml layouts automatically generate an object class that corresponds to the layout
+    // you just have to implement it
     private FragmentCoursesBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
 
+        // binding gets and renders the layout the its class name corresponds to
         binding = FragmentCoursesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        FloatingActionButton addCourseButton = root.findViewById(R.id.add_course_button);
+        addCourseButton.setOnClickListener(new View.OnClickListener()){
+            @Override
+            public void OnClick(View view) {
+
+            }
+        }
+
+        // This is the object that accesses the recyclerview in our course layout
+        RecyclerView courseRecycler = binding.coursesRecyclerview;
+        courseRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        CourseAdapter adapter = new CourseAdapter();
+
 
         return root;
     }
