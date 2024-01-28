@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/class_schedule_dashboard">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/class_schedule_dashboard"
         android:name="com.example.cs2340proj1.ui.courses.CoursesFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_class_schedule"
         tools:layout="@layout/fragment_courses" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.cs2340proj1.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/todo_list_dashboard"
+        android:name="com.example.cs2340proj1.ui.todo.TodoListFragment"
+        android:label="@string/title_todo_list"
+        tools:layout="@layout/fragment_todo_list" />
 
     <fragment
         android:id="@+id/navigation_notifications"
