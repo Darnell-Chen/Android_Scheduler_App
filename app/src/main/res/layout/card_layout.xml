@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:card_view="http://schemas.android.com/tools"
     android:layout_margin="10dp"
     android:backgroundTint="#594FE3D7"
+    android:foregroundTint="#C61616"
     app:cardCornerRadius="20dp"
     app:cardElevation="5dp"
     card_view:contentPadding="15dp">
@@ -88,20 +89,31 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-        </LinearLayout>
+            <ImageButton
+                android:id="@+id/course_delete_button"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:backgroundTint="#00FFFFFF"
+                android:src="@drawable/edit_icon"
+                android:tint="@color/time_button_color"
+                card_view:ignore="InefficientWeight" />
 
-        <ImageButton
-            android:id="@+id/imageButton3"
-            android:layout_width="30dp"
-            android:layout_height="35dp"
-            android:layout_weight="1"
-            android:backgroundTint="#00FFFFFF"
-            android:src="@android:drawable/btn_star"
-            card_view:ignore="InefficientWeight" />
+            <ImageButton
+                android:id="@+id/course_edit_button"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:backgroundTint="#00FFFFFF"
+                android:src="@drawable/delete_icon"
+                app:tint="@color/time_button_color"
+                card_view:ignore="InefficientWeight" />
+
+        </LinearLayout>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
