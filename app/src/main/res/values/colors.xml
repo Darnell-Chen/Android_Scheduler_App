@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gtGold">#B3A369</color>
     <color name="gtNavy">#003057</color>
+    <color name="time_button_color">#8E8891</color>
 </resources>

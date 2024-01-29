@@ -2,11 +2,12 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    >
+    android:backgroundTint="#E8D18E">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#DCB676"
         android:orientation="vertical"
         android:padding="6dp">
 
@@ -14,9 +15,12 @@
             android:id="@+id/courseSection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#00AA4C4C"
+            android:backgroundTint="#00AA2525"
+            android:text="CS2340"
             android:textAllCaps="true"
-            android:textSize="15sp"
-            android:text="@string/cardFiller" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/professorName"
@@ -40,6 +44,6 @@
             android:id="@+id/classDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/cardFiller"/>
+            android:text="@string/cardFiller" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

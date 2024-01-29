@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -20,7 +21,8 @@
         android:layout_height="wrap_content"
         android:hint="@string/course_name_hint"
         android:autofillHints="CS2340"
-        android:inputType="textCapCharacters"/>
+        android:inputType="textCapCharacters"
+        android:layout_marginBottom="20dp"/>
 
     <TextView
         android:id="@+id/professorInputText"
@@ -34,7 +36,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints="Feijo Garcia"
-        android:hint="@string/course_professor_hint"/>
+        android:hint="@string/course_professor_hint"
+        android:layout_marginBottom="15dp"/>
 
     <TextView
         android:paddingTop="20dp"
@@ -84,16 +87,41 @@
 
     <TextView
         android:id="@+id/timeInputText"
-        android:labelFor="@id/timeInputEdit"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="@string/timeCard"/>
 
-    <EditText
-        android:id="@+id/timeInputEdit"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/course_time_hint" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginBottom="25dp">
+
+
+        <Button
+            android:id="@+id/start_time_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/time_button_color"
+            android:text="@string/start_time"
+            android:textColor="@color/white"
+            app:iconTint="@color/white" />
+
+        <Button
+            android:id="@+id/end_time_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/time_button_color"
+            android:text="@string/end_time"
+            android:textColor="@color/white"
+            app:iconTint="@color/white" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/locationInputText"
@@ -116,7 +144,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/save_card_editor" />
+        android:text="@string/save_card_editor"
+        android:layout_marginTop="30"/>
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
