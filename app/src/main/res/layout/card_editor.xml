@@ -4,98 +4,142 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:background="@drawable/round_rectangle"
     android:orientation="vertical"
     android:padding="20dp"
-    android:backgroundTint="@color/black">
+    app:CornerRadius="20dp"
+    app:cardElevation="10dp">
 
     <TextView
         android:id="@+id/courseInputText"
-        android:labelFor="@+id/courseInputEdit"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@string/courseCard"/>
+        android:layout_height="wrap_content"
+        android:labelFor="@+id/courseInputEdit"
+        android:text="@string/courseCard" />
 
     <EditText
         android:id="@+id/courseInputEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/course_name_hint"
+        android:layout_marginBottom="20dp"
         android:autofillHints="CS2340"
-        android:inputType="textCapCharacters"
-        android:layout_marginBottom="20dp"/>
+        android:hint="@string/course_name_hint"
+        android:inputType="textCapCharacters" />
 
     <TextView
         android:id="@+id/professorInputText"
-        android:labelFor="@+id/professorInputEdit"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:labelFor="@+id/professorInputEdit"
         android:text="@string/professorCard" />
 
     <EditText
         android:id="@+id/professorInputEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
         android:autofillHints="Feijo Garcia"
-        android:hint="@string/course_professor_hint"
-        android:layout_marginBottom="15dp"/>
+        android:hint="@string/course_professor_hint" />
 
     <TextView
-        android:paddingTop="20dp"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@string/daysOfWeekCard"/>
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:text="@string/daysOfWeekCard" />
 
     <LinearLayout
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        tools:ignore="UseSwitchCompatOrMaterialXml">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="0.5" >
+        </Space>
+
+
+        <Switch
+            android:id="@+id/wed_switch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/wednesday_String" />
+
+        <Switch
+            android:id="@+id/thur_switch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/thursday_String" />
+
+        <Switch
+            android:id="@+id/fri_switch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/friday_String" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="0.5" >
+        </Space>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingTop="10dp"
         android:paddingBottom="30dp"
         tools:ignore="UseSwitchCompatOrMaterialXml">
 
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" >
+        </Space>
+
         <Switch
             android:id="@+id/mon_switch"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/monday_String" />
+
 
         <Switch
             android:id="@+id/tue_switch"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/tuesday_String" />
 
-        <Switch
-            android:id="@+id/wed_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/wednesday_String" />
-
-        <Switch
-            android:id="@+id/thur_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/thursday_String" />
-
-        <Switch
-            android:id="@+id/fri_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/friday_String" />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" >
+        </Space>
 
     </LinearLayout>
 
     <TextView
         android:id="@+id/timeInputText"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@string/timeCard"/>
+        android:layout_height="wrap_content"
+        android:text="@string/timeCard" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginBottom="25dp">
+        android:layout_marginBottom="25dp"
+        android:orientation="horizontal">
 
 
         <Button
@@ -125,10 +169,10 @@
 
     <TextView
         android:id="@+id/locationInputText"
-        android:labelFor="@id/locationInputEdit"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@string/locationCard"/>
+        android:layout_height="wrap_content"
+        android:labelFor="@id/locationInputEdit"
+        android:text="@string/locationCard" />
 
 
     <EditText
@@ -136,7 +180,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/course_location_hint"
-        android:inputType="text"/>
+        android:inputType="text" />
 
 
     <Button
@@ -144,8 +188,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="30dp"
         android:text="@string/save_card_editor"
-        android:layout_marginTop="30"/>
+        android:backgroundTint="@color/time_button_color"/>
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
