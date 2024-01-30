@@ -8,7 +8,6 @@
     android:background="@drawable/round_rectangle"
     android:orientation="vertical"
     android:padding="20dp"
-    app:CornerRadius="20dp"
     app:cardElevation="10dp">
 
     <TextView
