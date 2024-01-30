@@ -39,8 +39,8 @@ public class CoursesFragment extends Fragment {
         addCourseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CourseBottomSheet bottomSheetFragment = CourseBottomSheet.newInstance();
-                bottomSheetFragment.show(getChildFragmentManager(), "bottom_sheet_dialog");
+                CourseBottomSheet bottomSheet = new CourseBottomSheet();
+                bottomSheet.show(getChildFragmentManager(), "doesnt matter");
             }
 
         });
