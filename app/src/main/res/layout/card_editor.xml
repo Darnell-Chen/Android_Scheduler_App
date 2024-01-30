@@ -39,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:autofillHints="Feijo Garcia"
+        android:inputType="text"
         android:hint="@string/course_professor_hint" />
 
     <TextView
@@ -179,7 +180,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/course_location_hint"
-        android:inputType="text" />
+        android:inputType="text"
+        tools:ignore="Autofill" />
 
 
     <Button
