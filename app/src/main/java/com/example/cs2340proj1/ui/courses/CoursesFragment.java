@@ -11,15 +11,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cs2340proj1.R;
+import com.example.cs2340proj1.databinding.CardEditorBinding;
 import com.example.cs2340proj1.databinding.FragmentCoursesBinding;
 import com.example.cs2340proj1.ui.CourseAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 
 public class CoursesFragment extends Fragment {
 
     // Note: xml layouts automatically generate an object class that corresponds to the layout
     // you just have to implement it
     private FragmentCoursesBinding binding;
+    private ArrayList<CourseInfo> myCourses;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -28,13 +32,17 @@ public class CoursesFragment extends Fragment {
         binding = FragmentCoursesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        // simply instantiate the empty list of courses
+        myCourses = new ArrayList<>();
+
         FloatingActionButton addCourseButton = root.findViewById(R.id.add_course_button);
         addCourseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Just filler until I find out what to do.
-                System.out.println("filler");
+                CourseBottomSheet bottomSheetFragment = CourseBottomSheet.newInstance();
+                bottomSheetFragment.show(getChildFragmentManager(), "bottom_sheet_dialog");
             }
+
         });
 
         // This is the object that accesses the recyclerview in our course layout
