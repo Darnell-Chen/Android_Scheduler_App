@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="20dp"
-    android:background="@drawable/round_rectangle"
+    android:background="@drawable/bottomSheetShape"
     android:orientation="vertical"
     android:padding="20dp"
     app:cardElevation="10dp">
