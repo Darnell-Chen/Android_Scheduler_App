@@ -10,9 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cs2340proj1.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHolder> {
-    public CourseAdapter(@NonNull View itemView) {
-        super();
+
+    // We'll make a list of courseInfos in both CourseFragment and here - both of which are synced
+    // This will make it easier for the two classes to share infos since both can create/edit cards
+    private ArrayList<CourseInfo> myCourses;
+    public CourseAdapter(ArrayList<CourseInfo> inputCourses) {
+        this.myCourses = inputCourses;
     }
 
     @NonNull
@@ -28,7 +35,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
 
     @Override
     public int getItemCount() {
-        return 0;
+        return myCourses.size();
     }
 
 
