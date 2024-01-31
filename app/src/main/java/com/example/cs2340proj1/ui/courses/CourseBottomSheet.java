@@ -23,11 +23,8 @@ public class CourseBottomSheet extends BottomSheetDialogFragment {
     public CourseBottomSheet() {
 
     }
-    Button addButton;
-    Button startButton;
-    Button endButton;
-    int hour;
-    int minute;
+    Button addButton, startButton, endButton;
+    int hour, minute;
 
     @Nullable
     @Override
