@@ -23,7 +23,15 @@ public class CourseBottomSheet extends BottomSheetDialogFragment {
         View view = inflater.inflate(R.layout.card_editor, container, false);
 
         Button addButton = view.findViewById(R.id.save_card_edit);
-        addButton.setOnClickListener();
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                // closes the bottom sheet dialog
+                dismiss();
+            }
+        });
 
         return view;
     }
