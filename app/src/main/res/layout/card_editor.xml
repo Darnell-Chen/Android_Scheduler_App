@@ -190,8 +190,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
+        android:backgroundTint="@color/time_button_color"
         android:text="@string/save_card_editor"
-        android:backgroundTint="@color/time_button_color"/>
+        android:textColor="@color/white" />
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>

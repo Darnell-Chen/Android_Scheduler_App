@@ -35,22 +35,26 @@ public class CoursesFragment extends Fragment {
         // simply instantiate the empty list of courses
         myCourses = new ArrayList<>();
 
-        FloatingActionButton addCourseButton = root.findViewById(R.id.add_course_button);
-        addCourseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CourseBottomSheet bottomSheet = new CourseBottomSheet();
-                bottomSheet.show(getChildFragmentManager(), "doesnt matter");
-            }
-
-        });
-
         // This is the object that accesses the recyclerview in our course layout
         RecyclerView courseRecycler = binding.coursesRecyclerview;
         courseRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // CourseAdapter will update the information in card
         CourseAdapter adapter = new CourseAdapter();
+
+
+
+        // gets floating action button and makes it so bottom sheet (editor) opens
+        // when you click on it
+        FloatingActionButton addCourseButton = root.findViewById(R.id.add_course_button);
+        addCourseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CourseBottomSheet bottomSheet = new CourseBottomSheet();
+                bottomSheet.show(getChildFragmentManager(), "Pops up our bottom sheet!");
+            }
+
+        });
 
 
         return root;

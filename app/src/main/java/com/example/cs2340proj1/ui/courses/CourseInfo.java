@@ -3,14 +3,7 @@ package com.example.cs2340proj1.ui.courses;
 import android.annotation.SuppressLint;
 
 public class CourseInfo {
-    private String courseName;
-    private String professor;
-    private String startTime;
-
-    private String endTime
-    private String date;
-
-    private String location;
+    private String courseName, professor, startTime, endTime, date, location;
 
     public CourseInfo(String pCourse, String pProf, String pStart, String pEnd, String pDate, String pLocation) {
         this.courseName = pCourse;

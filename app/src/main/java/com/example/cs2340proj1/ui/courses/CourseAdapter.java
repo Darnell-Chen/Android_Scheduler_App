@@ -12,7 +12,7 @@ import com.example.cs2340proj1.R;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHolder> {
     public CourseAdapter(@NonNull View itemView) {
-        super(itemView);
+        super();
     }
 
     @NonNull
