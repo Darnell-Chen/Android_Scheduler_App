@@ -49,6 +49,7 @@ public class CoursesFragment extends Fragment {
         RecyclerView courseRecycler = binding.coursesRecyclerview;
         courseRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        // CourseAdapter will update the information in card
         CourseAdapter adapter = new CourseAdapter();
 
 
