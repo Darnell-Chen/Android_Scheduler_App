@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cs2340proj1.R;
-import com.example.cs2340proj1.databinding.CardEditorBinding;
 import com.example.cs2340proj1.databinding.FragmentCoursesBinding;
-import com.example.cs2340proj1.ui.CourseAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -25,6 +23,8 @@ public class CoursesFragment extends Fragment {
     private FragmentCoursesBinding binding;
     private ArrayList<CourseInfo> myCourses;
 
+    private RecyclerView myRecycler;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -32,15 +32,26 @@ public class CoursesFragment extends Fragment {
         binding = FragmentCoursesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        initializeCardView(root);
+
+        return root;
+    }
+
+
+
+
+    public void initializeCardView(View root) {
+
         // simply instantiate the empty list of courses
         myCourses = new ArrayList<>();
 
-        // This is the object that accesses the recyclerview in our course layout
-        RecyclerView courseRecycler = binding.coursesRecyclerview;
-        courseRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-
         // CourseAdapter will update the information in card
-        CourseAdapter adapter = new CourseAdapter();
+        CourseAdapter adapter = new CourseAdapter(this, myCourses);
+
+        // finds the recycler view and sets its adapter - which will funnel the data
+        myRecycler = binding.coursesRecyclerview;
+        myRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        myRecycler.setAdapter(adapter);
 
 
 
@@ -51,13 +62,12 @@ public class CoursesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 CourseBottomSheet bottomSheet = new CourseBottomSheet();
-                bottomSheet.show(getChildFragmentManager(), "Pops up our bottom sheet!");
+                bottomSheet.show(getChildFragmentManager(), "Bottom sheet should pop up");
             }
 
         });
 
 
-        return root;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.cs2340proj1.ui.courses;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,26 +12,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cs2340proj1.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHolder> {
 
     // We'll make a list of courseInfos in both CourseFragment and here - both of which are synced
     // This will make it easier for the two classes to share infos since both can create/edit cards
     private ArrayList<CourseInfo> myCourses;
-    public CourseAdapter(ArrayList<CourseInfo> inputCourses) {
+
+
+    public CourseAdapter(CoursesFragment context, ArrayList<CourseInfo> inputCourses) {
         this.myCourses = inputCourses;
     }
 
     @NonNull
     @Override
     public CourseHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View cardView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.card_layout, parent, false);
+        return new CourseHolder(cardView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CourseHolder holder, int position) {
-
+        CourseInfo courseInfo = myCourses.get(position);
+        holder.setCard(courseInfo);
     }
 
     @Override
