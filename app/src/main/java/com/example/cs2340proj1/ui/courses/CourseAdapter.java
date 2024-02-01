@@ -44,12 +44,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
     }
 
 
-
-
-
-
-
-
     class CourseHolder extends RecyclerView.ViewHolder{
 
         private TextView course, prof, start, end, dates, location;
