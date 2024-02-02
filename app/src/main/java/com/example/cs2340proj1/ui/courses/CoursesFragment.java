@@ -70,7 +70,7 @@ public class CoursesFragment extends Fragment {
         courseList = new ArrayList<CourseInfo>();
 
         // CourseAdapter will update the information in card
-        adapter = new CourseAdapter(this, courseList);
+        adapter = new CourseAdapter(this.getContext(), courseList);
 
         // finds the recycler view and sets its adapter - which will funnel the data
         RecyclerView myRecycler = binding.coursesRecyclerview;

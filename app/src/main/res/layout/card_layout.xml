@@ -68,6 +68,14 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/to"
+                android:textColor="@color/card_text_color"
+                android:textSize="20sp" />
+
+            <TextView
                 android:id="@+id/classTimeEnd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -89,7 +97,7 @@
                 android:layout_height="35dp"
                 android:layout_weight="1"
                 android:backgroundTint="#00FFFFFF"
-                android:src="@drawable/edit_icon"
+                android:src="@drawable/delete_icon"
                 android:tint="@color/time_button_color"
                 card_view:ignore="InefficientWeight" />
 
@@ -99,7 +107,7 @@
                 android:layout_height="35dp"
                 android:layout_weight="1"
                 android:backgroundTint="#00FFFFFF"
-                android:src="@drawable/delete_icon"
+                android:src="@drawable/edit_icon"
                 app:tint="@color/time_button_color"
                 card_view:ignore="InefficientWeight" />
 

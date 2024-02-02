@@ -4,9 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cs2340proj1.R;
@@ -20,9 +25,13 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
     // This will make it easier for the two classes to share infos since both can create/edit cards
     private ArrayList<CourseInfo> myCourses;
 
+    private Context context;
 
-    public CourseAdapter(CoursesFragment context, ArrayList<CourseInfo> inputCourses) {
+
+
+    public CourseAdapter(Context context, ArrayList<CourseInfo> inputCourses) {
         this.myCourses = inputCourses;
+        this.context = context;
     }
 
     @NonNull
@@ -37,16 +46,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
     public void onBindViewHolder(@NonNull CourseHolder holder, int position) {
         CourseInfo courseInfo = myCourses.get(position);
         holder.setCard(courseInfo);
+        holder.position = position;
     }
 
     @Override
     public int getItemCount() {
         return myCourses.size();
-    }
-
-    public void addCourse(CourseInfo courseInfo) {
-        myCourses.add(courseInfo);
-        notifyDataSetChanged();
     }
 
     public void setCourseList(ArrayList<CourseInfo> newList) {
@@ -56,8 +61,9 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
 
 
     class CourseHolder extends RecyclerView.ViewHolder{
-
         private TextView course, prof, start, end, dates, location;
+        public ImageButton editButton;
+        public int position;
         public CourseHolder(@NonNull View itemView) {
             super(itemView);
             course = itemView.findViewById(R.id.courseSection);
@@ -66,6 +72,19 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
             end = itemView.findViewById(R.id.classTimeEnd);
             dates = itemView.findViewById(R.id.classDays);
             location = itemView.findViewById(R.id.classLocation);
+
+
+            editButton = itemView.findViewById(R.id.course_edit_button);
+
+            editButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "debugging toast :(",
+                            Toast.LENGTH_LONG).show();
+
+
+                }
+            });
         }
 
         void setCard(CourseInfo currCourseInfo) {
