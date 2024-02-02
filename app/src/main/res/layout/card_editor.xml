@@ -2,6 +2,7 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/card_editor_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="20dp"
@@ -142,29 +143,38 @@
         android:orientation="horizontal">
 
 
-        <Button
-            android:id="@+id/start_time_button"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/time_button_color"
-            android:text="@string/start_time"
-            android:textColor="@color/white"
-            app:iconTint="@color/white" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/end_time_button"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/time_button_color"
-            android:text="@string/end_time"
-            android:textColor="@color/white"
-            app:iconTint="@color/white" />
+            <Button
+                android:id="@+id/start_time_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/time_button_color"
+                android:text="@string/start_time"
+                android:textColor="@color/white" />
+
+            <!-- Adjust the weight of the space to distribute the remaining space evenly -->
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="0.05" >
+            </Space>
+
+            <Button
+                android:id="@+id/end_time_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/time_button_color"
+                android:text="@string/end_time"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+
     </LinearLayout>
 
     <TextView
@@ -183,16 +193,40 @@
         android:inputType="text"
         tools:ignore="Autofill" />
 
-
-    <Button
-        android:id="@+id/save_card_edit"
-        android:layout_width="wrap_content"
+    <LinearLayout
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="@color/time_button_color"
-        android:text="@string/save_card_editor"
-        android:textColor="@color/white" />
+        android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/save_card_edit"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/time_button_color"
+            android:text="@string/save_card_editor"
+            android:textColor="@color/white" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="0.1" >
+        </Space>
+
+        <Button
+            android:id="@+id/cancel_card_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/time_button_color"
+            android:text="@string/cancel_card_editor"
+            android:textColor="@color/white" />
+
+
+    </LinearLayout>
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>

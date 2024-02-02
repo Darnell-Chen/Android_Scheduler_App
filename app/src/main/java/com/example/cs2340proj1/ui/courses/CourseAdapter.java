@@ -43,6 +43,11 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
         return myCourses.size();
     }
 
+    public void addCourse(CourseInfo courseInfo) {
+        myCourses.add(courseInfo);
+        notifyDataSetChanged();
+    }
+
 
     class CourseHolder extends RecyclerView.ViewHolder{
 

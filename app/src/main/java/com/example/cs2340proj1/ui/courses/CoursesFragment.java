@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,16 +15,17 @@ import com.example.cs2340proj1.R;
 import com.example.cs2340proj1.databinding.FragmentCoursesBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CoursesFragment extends Fragment {
 
     // Note: xml layouts automatically generate an object class that corresponds to the layout
     // you just have to implement it
     private FragmentCoursesBinding binding;
-    private ArrayList<CourseInfo> myCourses;
 
-    private RecyclerView myRecycler;
+    private ArrayList<CourseInfo> courseList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,14 +44,13 @@ public class CoursesFragment extends Fragment {
 
     public void initializeCardView(View root) {
 
-        // simply instantiate the empty list of courses
-        myCourses = new ArrayList<>();
+        courseList = new ArrayList<CourseInfo>();
 
         // CourseAdapter will update the information in card
-        CourseAdapter adapter = new CourseAdapter(this, myCourses);
+        CourseAdapter adapter = new CourseAdapter(this, courseList);
 
         // finds the recycler view and sets its adapter - which will funnel the data
-        myRecycler = binding.coursesRecyclerview;
+        RecyclerView myRecycler = binding.coursesRecyclerview;
         myRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         myRecycler.setAdapter(adapter);
 
@@ -61,13 +62,14 @@ public class CoursesFragment extends Fragment {
         addCourseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CourseBottomSheet bottomSheet = new CourseBottomSheet();
-                bottomSheet.show(getChildFragmentManager(), "Bottom sheet should pop up");
+                CourseEditorFragment courseEditorFragment = new CourseEditorFragment();
+                requireActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.card_editor_layout, courseEditorFragment, "findThisFragment")
+                        .addToBackStack(null)
+                        .commit();
             }
 
         });
-
-
     }
 
     @Override

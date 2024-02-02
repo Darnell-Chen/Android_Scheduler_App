@@ -1,10 +1,6 @@
 package com.example.cs2340proj1.ui.courses;
 
-import static android.app.TimePickerDialog.*;
-
-import android.annotation.SuppressLint;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,41 +12,32 @@ import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.cs2340proj1.R;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-import java.util.Calendar;
 import java.util.Locale;
 
-public class CourseBottomSheet extends BottomSheetDialogFragment {
-    public CourseBottomSheet() {
+public class CourseEditorFragment extends Fragment {
 
+    public CourseEditorFragment() {
     }
     Button addButton, startButton, endButton;
     EditText courseEdit, professorEdit, locationEdit;
     int hour, minute;
-
-    CoursesFragment newCourse;
+    CourseInfo newCourse;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.card_editor, container, false);
 
-        addButton = view.findViewById(R.id.save_card_edit);
-        startButton = view.findViewById(R.id.start_time_button);
-        endButton = view.findViewById(R.id.end_time_button);
-
-        courseEdit = view.findViewById(R.id.courseInputEdit);
-        professorEdit = view.findViewById(R.id.professorInputEdit);
-        locationEdit = view.findViewById(R.id.locationInputEdit);
+        // simply instantiates all of the buttons and EditText
+        findLayout(view);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
 
                 String courseName = courseEdit.getText().toString();
                 String professor = professorEdit.getText().toString();
@@ -60,7 +47,9 @@ public class CourseBottomSheet extends BottomSheetDialogFragment {
 
                 boolean[] dates = getDates(view);
 
-                dismiss();
+                newCourse = new CourseInfo(courseName, professor, startTime, endTime, dates, location, "");
+
+
             }
 
         });
@@ -84,6 +73,15 @@ public class CourseBottomSheet extends BottomSheetDialogFragment {
         return view;
     }
 
+    private void findLayout(View view) {
+        addButton = view.findViewById(R.id.save_card_edit);
+        startButton = view.findViewById(R.id.start_time_button);
+        endButton = view.findViewById(R.id.end_time_button);
+
+        courseEdit = view.findViewById(R.id.courseInputEdit);
+        professorEdit = view.findViewById(R.id.professorInputEdit);
+        locationEdit = view.findViewById(R.id.locationInputEdit);
+    }
 
 
     private boolean[] getDates(View view) {

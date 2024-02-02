@@ -25,4 +25,5 @@
     <string name="end_time">End Time</string>
     <string name="course">card_layout_course</string>
     <string name="card_layout_professor">professor</string>
+    <string name="cancel_card_editor">cancel</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.example.cs2340proj1;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -20,6 +22,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // The sharedPref will be created in the main activity as it's the parent context
+        // of all of the fragments that we navigate to
+        SharedPreferences sharedPref = getSharedPreferences("storedInformation", Context.MODE_PRIVATE);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
