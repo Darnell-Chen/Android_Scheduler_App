@@ -48,8 +48,6 @@ public class CourseEditorFragment extends Fragment {
                 boolean[] dates = getDates(view);
 
                 newCourse = new CourseInfo(courseName, professor, startTime, endTime, dates, location, "");
-
-
             }
 
         });

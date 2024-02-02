@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,9 +16,7 @@ import com.example.cs2340proj1.R;
 import com.example.cs2340proj1.databinding.FragmentCoursesBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class CoursesFragment extends Fragment {
 
@@ -27,12 +26,28 @@ public class CoursesFragment extends Fragment {
 
     private ArrayList<CourseInfo> courseList;
 
+    CourseEditorFragment courseEditorFragment;
+    CourseViewModel viewModel;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         // binding gets and renders the layout the its class name corresponds to
         binding = FragmentCoursesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        // This will grab the view model that was created in main activity.
+        viewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
+
+        viewModel.getCourseList().observe(getViewLifecycleOwner(), new Observer<ArrayList<CourseInfo>>() {
+            @Override
+            public void onChanged(ArrayList<CourseInfo> newData) {
+                // Handle the updated data here
+                // newData contains the updated list of courses
+                // Update your RecyclerView or UI with the new data
+            }
+        });
+
 
         initializeCardView(root);
 
@@ -62,9 +77,9 @@ public class CoursesFragment extends Fragment {
         addCourseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CourseEditorFragment courseEditorFragment = new CourseEditorFragment();
+                courseEditorFragment = new CourseEditorFragment();
                 requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.card_editor_layout, courseEditorFragment, "findThisFragment")
+                        .replace(((ViewGroup) requireView().getParent()).getId(), courseEditorFragment, "findThisFragment")
                         .addToBackStack(null)
                         .commit();
             }
@@ -74,6 +89,15 @@ public class CoursesFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
+
+        // This will destroy the course editor layout if we click on another tab
+        if (courseEditorFragment != null) {
+            requireActivity().getSupportFragmentManager().beginTransaction()
+                    .remove(courseEditorFragment)
+                    .commit();
+            courseEditorFragment = null; // Set the reference to null to avoid memory leaks
+        }
+
         super.onDestroyView();
         binding = null;
     }

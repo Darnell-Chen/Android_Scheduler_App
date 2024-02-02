@@ -5,9 +5,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.cs2340proj1.ui.courses.CourseViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -18,6 +20,7 @@ import com.example.cs2340proj1.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private CourseViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
         // The sharedPref will be created in the main activity as it's the parent context
         // of all of the fragments that we navigate to
         SharedPreferences sharedPref = getSharedPreferences("storedInformation", Context.MODE_PRIVATE);
+
+        // Creates a view model, which will provide the live data to every fragment in the activity
+        viewModel = new ViewModelProvider(this).get(CourseViewModel.class);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
