@@ -17,18 +17,22 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cs2340proj1.R;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class CourseEditorFragment extends Fragment {
 
-    public CourseEditorFragment() {
-    }
     Button addButton, startButton, endButton;
     EditText courseEdit, professorEdit, locationEdit;
     int hour, minute;
+
+    CourseInfo oldCourse;
     CourseInfo newCourse;
 
     CourseViewModel viewModel;
+
+    public CourseEditorFragment() {
+    }
 
     @Nullable
     @Override
@@ -50,7 +54,7 @@ public class CourseEditorFragment extends Fragment {
 
                 String[] dates = getDates(view);
 
-                newCourse = new CourseInfo(courseName, professor, startTime, endTime, dates, location, "");
+                newCourse = new CourseInfo(courseName, professor, startTime, endTime, dates, location);
 
                 viewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
 

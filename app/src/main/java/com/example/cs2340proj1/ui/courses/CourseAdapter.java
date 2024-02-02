@@ -46,6 +46,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
     public void onBindViewHolder(@NonNull CourseHolder holder, int position) {
         CourseInfo courseInfo = myCourses.get(position);
         holder.setCard(courseInfo);
+        // This is so our cardholder knows the index of the current card
         holder.position = position;
     }
 
@@ -79,9 +80,16 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
             editButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "debugging toast :(",
-                            Toast.LENGTH_LONG).show();
 
+                    Toast.makeText(itemView.getContext(), "Clicked Card...", Toast.LENGTH_LONG).show();
+
+                    FragmentActivity activity = (FragmentActivity) context;
+                    CourseEditorFragment editCourseFragment = new CourseEditorFragment();
+
+                    activity.getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.courseXML, editCourseFragment, "findThisFragment")
+                            .addToBackStack(null)
+                            .commit();
 
                 }
             });

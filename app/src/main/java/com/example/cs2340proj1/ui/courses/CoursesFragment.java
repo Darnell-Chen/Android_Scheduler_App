@@ -87,7 +87,7 @@ public class CoursesFragment extends Fragment {
             public void onClick(View v) {
                 courseEditorFragment = new CourseEditorFragment();
                 requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(((ViewGroup) requireView().getParent()).getId(), courseEditorFragment, "findThisFragment")
+                        .replace(R.id.courseXML, courseEditorFragment, "findThisFragment")
                         .addToBackStack(null)
                         .commit();
             }

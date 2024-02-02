@@ -3,15 +3,12 @@ package com.example.cs2340proj1.ui.courses;
 import android.annotation.SuppressLint;
 
 public class CourseInfo {
-    private String courseName, professor, startTime, endTime, location, todoName;
+    private String courseName, professor, startTime, endTime, location;
     String[] date;
 
     public CourseInfo(String pCourse, String pProf, String pStart, String pEnd, String[] pDate,
-                      String pLocation, String pTodo) {
+                      String pLocation) {
 
-        if (!pTodo.equals("")) {
-            this.todoName = pTodo;
-        }
 
         if (!pCourse.equals("")) {
             this.courseName = pCourse;
@@ -74,13 +71,5 @@ public class CourseInfo {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public String getTodoName() {
-        return todoName;
-    }
-
-    public void setTodoName(String todoName) {
-        this.todoName = todoName;
     }
 }
