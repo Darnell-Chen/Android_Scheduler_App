@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         // The sharedPref will be created in the main activity as it's the parent context
         // of all of the fragments that we navigate to
-        SharedPreferences sharedPref = getSharedPreferences("storedInformation", Context.MODE_PRIVATE);
+//        SharedPreferences sharedPref = getSharedPreferences("storedInformation", Context.MODE_PRIVATE);
 
         // Creates a view model, which will provide the live data to every fragment in the activity
         viewModel = new ViewModelProvider(this).get(CourseViewModel.class);

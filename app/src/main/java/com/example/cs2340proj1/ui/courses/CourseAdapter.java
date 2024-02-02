@@ -64,6 +64,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
 
         void setCard(CourseInfo courseCard) {
 
+            System.out.println("Hello, setting cards");
+
             course.setText("Hello World");
             prof.setText("Hello Profesor");
             start.setText("start time");
