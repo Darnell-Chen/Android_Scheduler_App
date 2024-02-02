@@ -12,11 +12,6 @@ public class CourseViewModel extends ViewModel {
     private MutableLiveData<ArrayList<CourseInfo>> courseList = new  MutableLiveData<ArrayList<CourseInfo>>();
 
 
-    public CourseViewModel(ArrayList<CourseInfo> initialCourses) {
-        courseList.setValue(initialCourses);
-    }
-
-
     public LiveData<ArrayList<CourseInfo>> getCourseList() {
         return courseList;
     }
@@ -31,6 +26,7 @@ public class CourseViewModel extends ViewModel {
         if (currentList == null) {
             currentList = new ArrayList<>();
         }
+
         currentList.add(courseInfo);
         courseList.setValue(currentList);
     }

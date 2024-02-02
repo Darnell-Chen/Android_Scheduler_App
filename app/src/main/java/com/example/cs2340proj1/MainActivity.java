@@ -17,6 +17,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.cs2340proj1.databinding.ActivityMainBinding;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Creates a view model, which will provide the live data to every fragment in the activity
         viewModel = new ViewModelProvider(this).get(CourseViewModel.class);
+
+        viewModel.setCourseList(new ArrayList<>());
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

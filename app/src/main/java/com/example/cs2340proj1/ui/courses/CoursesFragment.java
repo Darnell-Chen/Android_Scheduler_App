@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -48,7 +49,16 @@ public class CoursesFragment extends Fragment {
         viewModel.getCourseList().observe(getViewLifecycleOwner(), new Observer<ArrayList<CourseInfo>>() {
             @Override
             public void onChanged(ArrayList<CourseInfo> newData) {
-                adapter.notifyDataSetChanged();
+                // This will destroy the course editor layout if we click on another tab
+                if (courseEditorFragment != null) {
+                    destroyEditor();
+
+                    courseList = viewModel.getCourseList().getValue();
+
+                    System.out.println(courseList.get(0).getLocation());
+
+                    adapter.notifyDataSetChanged();
+                }
             }
         });
 
@@ -91,15 +101,19 @@ public class CoursesFragment extends Fragment {
     @Override
     public void onDestroyView() {
 
+        destroyEditor();
+
+        super.onDestroyView();
+        binding = null;
+    }
+
+    public void destroyEditor() {
         // This will destroy the course editor layout if we click on another tab
         if (courseEditorFragment != null) {
             requireActivity().getSupportFragmentManager().beginTransaction()
                     .remove(courseEditorFragment)
                     .commit();
-            courseEditorFragment = null; // Set the reference to null to avoid memory leaks
+            courseEditorFragment = null;
         }
-
-        super.onDestroyView();
-        binding = null;
     }
 }
