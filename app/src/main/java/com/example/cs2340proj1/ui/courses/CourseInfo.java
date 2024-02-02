@@ -4,9 +4,9 @@ import android.annotation.SuppressLint;
 
 public class CourseInfo {
     private String courseName, professor, startTime, endTime, location, todoName;
-    boolean[] date;
+    String[] date;
 
-    public CourseInfo(String pCourse, String pProf, String pStart, String pEnd, boolean[] pDate,
+    public CourseInfo(String pCourse, String pProf, String pStart, String pEnd, String[] pDate,
                       String pLocation, String pTodo) {
 
         if (!pTodo.equals("")) {
@@ -44,7 +44,7 @@ public class CourseInfo {
         return endTime;
     }
 
-    public boolean[] getDate() {
+    public String[] getDate() {
         return date;
     }
 
@@ -68,7 +68,7 @@ public class CourseInfo {
         this.endTime = endTime;
     }
 
-    public void setDate(boolean[] date) {
+    public void setDate(String[] date) {
         this.date = date;
     }
 

@@ -52,12 +52,9 @@ public class CoursesFragment extends Fragment {
                 // This will destroy the course editor layout if we click on another tab
                 if (courseEditorFragment != null) {
                     destroyEditor();
-
                     courseList = viewModel.getCourseList().getValue();
 
-                    System.out.println(courseList.get(0).getLocation());
-
-                    adapter.notifyDataSetChanged();
+                    adapter.setCourseList(courseList);
                 }
             }
         });

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cs2340proj1.R;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHolder> {
 
@@ -48,6 +49,11 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
         notifyDataSetChanged();
     }
 
+    public void setCourseList(ArrayList<CourseInfo> newList) {
+        myCourses = newList;
+        notifyDataSetChanged();
+    }
+
 
     class CourseHolder extends RecyclerView.ViewHolder{
 
@@ -62,17 +68,34 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
             location = itemView.findViewById(R.id.classLocation);
         }
 
-        void setCard(CourseInfo courseCard) {
+        void setCard(CourseInfo currCourseInfo) {
 
-            System.out.println("Hello, setting cards");
-
-            course.setText("Hello World");
-            prof.setText("Hello Profesor");
-            start.setText("start time");
-            end.setText("Hello World");
-            dates.setText("Hello World");
-            location.setText("Hello World");
+            course.setText(currCourseInfo.getCourseName());
+            prof.setText(currCourseInfo.getProfessor());
+            start.setText(currCourseInfo.getStartTime());
+            end.setText(currCourseInfo.getEndTime());
+            dates.setText(getDates(currCourseInfo));
+            location.setText(currCourseInfo.getLocation());
 
         }
+
+        private String getDates(CourseInfo currCourseInfo) {
+
+            String returnedString = "";
+            String[] dayList = currCourseInfo.getDate();
+
+            for (int i = 0; i < dayList.length; i++) {
+                returnedString = returnedString.concat(dayList[i]);
+            }
+
+            System.out.println(returnedString);
+
+            if (returnedString.equals("")) {
+                return "TBA / Online Class";
+            } else {
+                return returnedString;
+            }
+        }
+
     }
 }

@@ -48,7 +48,7 @@ public class CourseEditorFragment extends Fragment {
                 String endTime = endButton.getText().toString();
                 String location = locationEdit.getText().toString();
 
-                boolean[] dates = getDates(view);
+                String[] dates = getDates(view);
 
                 newCourse = new CourseInfo(courseName, professor, startTime, endTime, dates, location, "");
 
@@ -89,20 +89,24 @@ public class CourseEditorFragment extends Fragment {
     }
 
 
-    private boolean[] getDates(View view) {
-        boolean[] dates = new boolean[5];
+    private String[] getDates(View view) {
+        String[] dates = new String[5];
 
-        Switch mon = view.findViewById(R.id.mon_switch);
-        Switch tues = view.findViewById(R.id.tue_switch);
-        Switch wed = view.findViewById(R.id.wed_switch);
-        Switch thur = view.findViewById(R.id.thur_switch);
-        Switch fri = view.findViewById(R.id.fri_switch);
+        Switch monSwitch = view.findViewById(R.id.mon_switch);
+        Switch tuesSwitch = view.findViewById(R.id.tue_switch);
+        Switch wedSwitch = view.findViewById(R.id.wed_switch);
+        Switch thurSwitch = view.findViewById(R.id.thur_switch);
+        Switch friSwitch = view.findViewById(R.id.fri_switch);
 
-        dates[0] = mon.isChecked();
-        dates[1] = tues.isChecked();
-        dates[2] = wed.isChecked();
-        dates[3] = thur.isChecked();
-        dates[4] = fri.isChecked();
+
+        // ternary operators where 1 = true, 0 = false
+        // depending on if the switch for that date is on or off, each element in the string
+        // is set to 0 or 1
+        dates[0] = (monSwitch.isChecked()) ? " Mon " : "";
+        dates[1] = (tuesSwitch.isChecked()) ? " Tues " : "";
+        dates[2] = (wedSwitch.isChecked()) ? " Wed " : "";
+        dates[3] = (thurSwitch.isChecked()) ? " Thurs " : "";
+        dates[4] = (friSwitch.isChecked()) ? " Fri " : "";
 
         return dates;
     }
