@@ -29,6 +29,8 @@ public class CoursesFragment extends Fragment {
     CourseEditorFragment courseEditorFragment;
     CourseViewModel viewModel;
 
+    CourseAdapter adapter;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -39,17 +41,16 @@ public class CoursesFragment extends Fragment {
         // This will grab the view model that was created in main activity.
         viewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
 
+        initializeCardView(root);
+
+        // This is the viewmodel observer. It will be notified everytime there is a charge to the
+        // list in the viewmodel
         viewModel.getCourseList().observe(getViewLifecycleOwner(), new Observer<ArrayList<CourseInfo>>() {
             @Override
             public void onChanged(ArrayList<CourseInfo> newData) {
-                // Handle the updated data here
-                // newData contains the updated list of courses
-                // Update your RecyclerView or UI with the new data
+                adapter.notifyDataSetChanged();
             }
         });
-
-
-        initializeCardView(root);
 
         return root;
     }
@@ -62,7 +63,7 @@ public class CoursesFragment extends Fragment {
         courseList = new ArrayList<CourseInfo>();
 
         // CourseAdapter will update the information in card
-        CourseAdapter adapter = new CourseAdapter(this, courseList);
+        adapter = new CourseAdapter(this, courseList);
 
         // finds the recycler view and sets its adapter - which will funnel the data
         RecyclerView myRecycler = binding.coursesRecyclerview;

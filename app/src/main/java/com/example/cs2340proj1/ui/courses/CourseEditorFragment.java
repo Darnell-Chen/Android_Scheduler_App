@@ -13,6 +13,7 @@ import android.widget.TimePicker;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cs2340proj1.R;
 
@@ -26,6 +27,8 @@ public class CourseEditorFragment extends Fragment {
     EditText courseEdit, professorEdit, locationEdit;
     int hour, minute;
     CourseInfo newCourse;
+
+    CourseViewModel viewModel;
 
     @Nullable
     @Override
@@ -48,6 +51,10 @@ public class CourseEditorFragment extends Fragment {
                 boolean[] dates = getDates(view);
 
                 newCourse = new CourseInfo(courseName, professor, startTime, endTime, dates, location, "");
+
+                viewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
+
+                viewModel.addCourseInfo(newCourse);
             }
 
         });
