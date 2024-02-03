@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
@@ -16,22 +17,32 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cs2340proj1.R;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class CourseEditorFragment extends Fragment {
+public class CourseEditorFragment extends BottomSheetDialogFragment {
 
     Button addButton, startButton, endButton;
     EditText courseEdit, professorEdit, locationEdit;
     int hour, minute;
-
-    CourseInfo oldCourse;
     CourseInfo newCourse;
-
     CourseViewModel viewModel;
 
+    int currPosition = -1;
+
     public CourseEditorFragment() {
+    }
+
+    public static Fragment newInstance(ArrayList<CourseInfo> currCourseList, int currIndex)
+    {
+        CourseEditorFragment myFragment = new CourseEditorFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("currList", currCourseList);
+        args.putInt("currPosition", currIndex);
+        myFragment.setArguments(args);
+        return myFragment;
     }
 
     @Nullable
@@ -41,6 +52,11 @@ public class CourseEditorFragment extends Fragment {
 
         // simply instantiates all of the buttons and EditText
         findLayout(view);
+
+        if (getArguments() != null) {
+            ArrayList<CourseInfo> courseList = (ArrayList<CourseInfo>) getArguments().getSerializable("currList");
+            currPosition = getArguments().getInt("currPosition");
+        }
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +74,15 @@ public class CourseEditorFragment extends Fragment {
 
                 viewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
 
-                viewModel.addCourseInfo(newCourse);
+                System.out.println("My Index is " + currPosition);
+
+                if (currPosition > -1) {
+                    viewModel.editCourseInfo(newCourse, currPosition);
+                } else {
+                    viewModel.addCourseInfo(newCourse);
+                }
+
+                dismiss();
             }
 
         });
@@ -80,6 +104,16 @@ public class CourseEditorFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private int setLayout(View view, Bundle myBundle) {
+        ArrayList<CourseInfo> currCourse = (ArrayList<CourseInfo>) myBundle.getSerializable("currList");
+
+        System.out.println("hello!!!!");
+
+        System.out.println(myBundle.getInt("currPosition"));
+
+        return (int) myBundle.getInt("currPosition");
     }
 
     private void findLayout(View view) {

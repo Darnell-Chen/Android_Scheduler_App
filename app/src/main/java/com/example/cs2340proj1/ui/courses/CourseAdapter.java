@@ -46,8 +46,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
     public void onBindViewHolder(@NonNull CourseHolder holder, int position) {
         CourseInfo courseInfo = myCourses.get(position);
         holder.setCard(courseInfo);
-        // This is so our cardholder knows the index of the current card
-        holder.position = position;
     }
 
     @Override
@@ -84,19 +82,15 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
                     Toast.makeText(itemView.getContext(), "Clicked Card...", Toast.LENGTH_LONG).show();
 
                     FragmentActivity activity = (FragmentActivity) context;
-                    CourseEditorFragment editCourseFragment = new CourseEditorFragment();
+                    CourseEditorFragment courseEditorFragment = (CourseEditorFragment) CourseEditorFragment.newInstance(myCourses, getAdapterPosition());
 
-                    activity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.courseXML, editCourseFragment, "findThisFragment")
-                            .addToBackStack(null)
-                            .commit();
-
+                    courseEditorFragment.show(activity.getSupportFragmentManager(), courseEditorFragment.getTag());
                 }
             });
         }
 
-        void setCard(CourseInfo currCourseInfo) {
 
+        void setCard(CourseInfo currCourseInfo) {
             course.setText(currCourseInfo.getCourseName());
             prof.setText(currCourseInfo.getProfessor());
             start.setText(currCourseInfo.getStartTime());

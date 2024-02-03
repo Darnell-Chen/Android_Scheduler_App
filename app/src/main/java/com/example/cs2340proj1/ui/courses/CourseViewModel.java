@@ -30,4 +30,12 @@ public class CourseViewModel extends ViewModel {
         currentList.add(courseInfo);
         courseList.setValue(currentList);
     }
+
+    public void editCourseInfo(CourseInfo courseInfo, int currIndex) {
+        ArrayList<CourseInfo> currentList = courseList.getValue();
+        if (currentList != null) {
+            currentList.set(currIndex, courseInfo);
+        }
+        courseList.setValue(currentList);
+    }
 }

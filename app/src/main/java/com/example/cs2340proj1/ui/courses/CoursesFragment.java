@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cs2340proj1.R;
 import com.example.cs2340proj1.databinding.FragmentCoursesBinding;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -50,12 +51,10 @@ public class CoursesFragment extends Fragment {
             @Override
             public void onChanged(ArrayList<CourseInfo> newData) {
                 // This will destroy the course editor layout if we click on another tab
-                if (courseEditorFragment != null) {
-                    destroyEditor();
-                    courseList = viewModel.getCourseList().getValue();
+                courseList = viewModel.getCourseList().getValue();
+                adapter.setCourseList(courseList);
 
-                    adapter.setCourseList(courseList);
-                }
+                System.out.println("HELLOOOOOOOOOOOOO");
             }
         });
 
@@ -86,10 +85,7 @@ public class CoursesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 courseEditorFragment = new CourseEditorFragment();
-                requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.courseXML, courseEditorFragment, "findThisFragment")
-                        .addToBackStack(null)
-                        .commit();
+                courseEditorFragment.show(getParentFragmentManager(), courseEditorFragment.getTag());
             }
 
         });
@@ -98,19 +94,7 @@ public class CoursesFragment extends Fragment {
     @Override
     public void onDestroyView() {
 
-        destroyEditor();
-
         super.onDestroyView();
         binding = null;
-    }
-
-    public void destroyEditor() {
-        // This will destroy the course editor layout if we click on another tab
-        if (courseEditorFragment != null) {
-            requireActivity().getSupportFragmentManager().beginTransaction()
-                    .remove(courseEditorFragment)
-                    .commit();
-            courseEditorFragment = null;
-        }
     }
 }
