@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class CourseViewModel extends ViewModel {
 
-    private MutableLiveData<ArrayList<CourseInfo>> courseList = new  MutableLiveData<ArrayList<CourseInfo>>();
+    private MutableLiveData<ArrayList<CourseInfo>> courseList = new MutableLiveData<ArrayList<CourseInfo>>();
 
 
     public LiveData<ArrayList<CourseInfo>> getCourseList() {
