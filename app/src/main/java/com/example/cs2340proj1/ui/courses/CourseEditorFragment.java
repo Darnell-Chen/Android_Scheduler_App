@@ -1,6 +1,8 @@
 package com.example.cs2340proj1.ui.courses;
 
+import android.app.AlertDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,6 +87,20 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
 
         });
 
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                viewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
+
+                if (currPosition > -1) {
+                    viewModel.deleteCourseInfo(currPosition);
+                }
+                dismiss();
+            }
+
+        });
+
 
         // buttom two onClick Listeners will open the Time Dialog for start and end time buttons
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +120,32 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
         return view;
     }
 
+    public boolean[] confirmationDialog() {
+
+        final boolean[] returnedBoolean = new boolean[1];
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        returnedBoolean[0] = true;
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        returnedBoolean[0] = false;
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
+        builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener).show();
+
+        return returnedBoolean;
+    }
+
+
     private void setLayout() {
         currPosition = getArguments().getInt("currPosition");
 
@@ -115,10 +157,13 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
         locationEdit.setText(currCourse.getLocation());
         startButton.setText(currCourse.getStartTime());
         endButton.setText(currCourse.getEndTime());
+
+        deleteButton.setText("Delete");
     }
 
     private void findLayout(View view) {
         addButton = view.findViewById(R.id.save_card_edit);
+        deleteButton = view.findViewById(R.id.cancel_card_edit);
         startButton = view.findViewById(R.id.start_time_button);
         endButton = view.findViewById(R.id.end_time_button);
 

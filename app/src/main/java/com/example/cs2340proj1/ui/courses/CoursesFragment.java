@@ -1,5 +1,7 @@
 package com.example.cs2340proj1.ui.courses;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,8 +47,6 @@ public class CoursesFragment extends Fragment {
 
         initializeCardView(root);
 
-
-
         // This is the viewmodel observer. It will be notified everytime there is a charge to the
         // list in the viewmodel
         viewModel.getCourseList().observe(getViewLifecycleOwner(), new Observer<ArrayList<CourseInfo>>() {
@@ -90,6 +90,7 @@ public class CoursesFragment extends Fragment {
 
         });
     }
+
 
     @Override
     public void onDestroyView() {

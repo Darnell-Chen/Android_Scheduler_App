@@ -10,16 +10,9 @@ public class CourseInfo {
                       String pLocation) {
 
 
-        if (!pCourse.equals("")) {
-            this.courseName = pCourse;
-        }
-
-        if (!pProf.equals("")) {
-            this.professor = pProf;
-        }
-
+        this.courseName = pCourse;
+        this.professor = pProf;
         this.date = pDate;
-
         this.startTime = pStart;
         this.endTime = pEnd;
         this.location = pLocation;
@@ -47,29 +40,5 @@ public class CourseInfo {
 
     public String getLocation() {
         return location;
-    }
-
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
-
-    public void setProfessor(String professor) {
-        this.professor = professor;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
-
-    public void setDate(String[] date) {
-        this.date = date;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 }

@@ -38,4 +38,12 @@ public class CourseViewModel extends ViewModel {
         }
         courseList.setValue(currentList);
     }
+
+    public void deleteCourseInfo(int currIndex) {
+        ArrayList<CourseInfo> currentList = courseList.getValue();
+        if (currentList != null) {
+            currentList.remove(currIndex);
+        }
+        courseList.setValue(currentList);
+    }
 }
