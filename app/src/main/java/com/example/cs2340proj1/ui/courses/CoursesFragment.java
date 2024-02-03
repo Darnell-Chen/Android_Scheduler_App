@@ -45,6 +45,8 @@ public class CoursesFragment extends Fragment {
 
         initializeCardView(root);
 
+
+
         // This is the viewmodel observer. It will be notified everytime there is a charge to the
         // list in the viewmodel
         viewModel.getCourseList().observe(getViewLifecycleOwner(), new Observer<ArrayList<CourseInfo>>() {
@@ -53,8 +55,6 @@ public class CoursesFragment extends Fragment {
                 // This will destroy the course editor layout if we click on another tab
                 courseList = viewModel.getCourseList().getValue();
                 adapter.setCourseList(courseList);
-
-                System.out.println("HELLOOOOOOOOOOOOO");
             }
         });
 

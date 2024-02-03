@@ -24,11 +24,12 @@ import java.util.Locale;
 
 public class CourseEditorFragment extends BottomSheetDialogFragment {
 
-    Button addButton, startButton, endButton;
+    Button addButton, startButton, endButton, deleteButton;
     EditText courseEdit, professorEdit, locationEdit;
     int hour, minute;
     CourseInfo newCourse;
     CourseViewModel viewModel;
+
 
     int currPosition = -1;
 
@@ -54,8 +55,7 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
         findLayout(view);
 
         if (getArguments() != null) {
-            ArrayList<CourseInfo> courseList = (ArrayList<CourseInfo>) getArguments().getSerializable("currList");
-            currPosition = getArguments().getInt("currPosition");
+            setLayout();
         }
 
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -73,8 +73,6 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
                 newCourse = new CourseInfo(courseName, professor, startTime, endTime, dates, location);
 
                 viewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
-
-                System.out.println("My Index is " + currPosition);
 
                 if (currPosition > -1) {
                     viewModel.editCourseInfo(newCourse, currPosition);
@@ -106,14 +104,17 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
         return view;
     }
 
-    private int setLayout(View view, Bundle myBundle) {
-        ArrayList<CourseInfo> currCourse = (ArrayList<CourseInfo>) myBundle.getSerializable("currList");
+    private void setLayout() {
+        currPosition = getArguments().getInt("currPosition");
 
-        System.out.println("hello!!!!");
+        ArrayList<CourseInfo> courseList = (ArrayList<CourseInfo>) getArguments().getSerializable("currList");
+        CourseInfo currCourse = courseList.get(currPosition);
 
-        System.out.println(myBundle.getInt("currPosition"));
-
-        return (int) myBundle.getInt("currPosition");
+        professorEdit.setText(currCourse.getProfessor());
+        courseEdit.setText(currCourse.getCourseName());
+        locationEdit.setText(currCourse.getLocation());
+        startButton.setText(currCourse.getStartTime());
+        endButton.setText(currCourse.getEndTime());
     }
 
     private void findLayout(View view) {
