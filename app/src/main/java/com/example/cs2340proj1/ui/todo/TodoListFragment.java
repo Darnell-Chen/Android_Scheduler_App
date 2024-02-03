@@ -18,11 +18,11 @@ public class TodoListFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        TodoListViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(TodoListViewModel.class);
 
         binding = FragmentTodoListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        TodoListViewModel dashboardViewModel = new ViewModelProvider(this).get(TodoListViewModel.class);
 
         final TextView textView = binding.textDashboard;
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);

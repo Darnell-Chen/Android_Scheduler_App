@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.cs2340proj1.ui.courses.CourseViewModel;
+import com.example.cs2340proj1.ui.todo.TodoListViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +23,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private CourseViewModel viewModel;
+    private CourseViewModel courseViewModel;
+    private TodoListViewModel todoViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +35,12 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences("storedInformation", Context.MODE_PRIVATE);
 
         // Creates a view model, which will provide the live data to every fragment in the activity
-        viewModel = new ViewModelProvider(this).get(CourseViewModel.class);
+        courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
+        courseViewModel.setCourseList(new ArrayList<>());
 
-        viewModel.setCourseList(new ArrayList<>());
+        todoViewModel = new ViewModelProvider(this).get(TodoListViewModel.class);
+        courseViewModel.setCourseList(new ArrayList<>());
+
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
