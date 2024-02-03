@@ -23,7 +23,7 @@
     <string name="course_professor_hint">Course Professor</string>
     <string name="start_time">Start Time</string>
     <string name="end_time">End Time</string>
-    <string name="course">card_layout_course</string>
+    <string name="course">Card Course</string>
     <string name="card_layout_professor">professor</string>
     <string name="cancel_card_editor">cancel</string>
     <string name="to">to</string>
