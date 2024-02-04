@@ -163,6 +163,7 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
         courseEdit.setText(currTodo.getCourse());
         locationEdit.setText(currTodo.getLocation());
         dateButton.setText(currTodo.getDate());
+        timeButton.setText(currTodo.getTime());
 
         deleteButton.setText("Delete");
     }
