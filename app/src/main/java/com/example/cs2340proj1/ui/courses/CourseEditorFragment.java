@@ -1,5 +1,6 @@
 package com.example.cs2340proj1.ui.courses;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
@@ -33,6 +34,10 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
 
 
     int currPosition = -1;
+
+    // Added to remember days of the week when editing card
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
+    Switch monSwitch, tuesSwitch, wedSwitch, thurSwitch, friSwitch;
 
     public CourseEditorFragment() {
     }
@@ -166,6 +171,14 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
         startButton.setText(currCourse.getStartTime());
         endButton.setText(currCourse.getEndTime());
 
+        // Added to remember days of the week when editing card
+        String[] dates = currCourse.getDate();
+        monSwitch.setChecked(dates[0].trim().equals("Mon"));
+        tuesSwitch.setChecked(dates[1].trim().equals("Tues"));
+        wedSwitch.setChecked(dates[2].trim().equals("Wed"));
+        thurSwitch.setChecked(dates[3].trim().equals("Thurs"));
+        friSwitch.setChecked(dates[4].trim().equals("Fri"));
+
         deleteButton.setText("Delete");
     }
 
@@ -178,6 +191,13 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
         courseEdit = view.findViewById(R.id.courseInputEdit);
         professorEdit = view.findViewById(R.id.professorInputEdit);
         locationEdit = view.findViewById(R.id.locationInputEdit);
+
+        // Added to remember days of the week when editing card
+        monSwitch = view.findViewById(R.id.mon_switch);
+        tuesSwitch = view.findViewById(R.id.tue_switch);
+        wedSwitch = view.findViewById(R.id.wed_switch);
+        thurSwitch = view.findViewById(R.id.thur_switch);
+        friSwitch = view.findViewById(R.id.fri_switch);
     }
 
 
