@@ -88,16 +88,25 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                viewModel = new ViewModelProvider(requireActivity()).get(TodoListViewModel.class);
-
-                if (currPosition > -1) {
-                    viewModel.deleteTodoInfo(currPosition);
-                }
-                dismiss();
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Delete Confirmation")
+                        .setMessage("Are you sure you want to delete this?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Continue with delete operation
+                                viewModel = new ViewModelProvider(requireActivity()).get(TodoListViewModel.class);
+                                if (currPosition > -1) {
+                                    viewModel.deleteTodoInfo(currPosition);
+                                }
+                                dismiss();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
             }
-
         });
+
 
 
         // buttom two onClick Listeners will open the Time Dialog for start and end time buttons
