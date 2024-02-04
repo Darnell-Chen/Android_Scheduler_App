@@ -68,6 +68,7 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
                 String course = courseEdit.getText().toString();
                 String time = timeButton.getText().toString();
                 String location = locationEdit.getText().toString();
+//                boolean completed = completedSwitch.isChecked();
 
                 newTodo = new TodoInfo(todoName, date, course, time, location);
 
@@ -166,6 +167,7 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
         nameEdit = view.findViewById(R.id.todoInputEdit);
         courseEdit = view.findViewById(R.id.todo_courseInputEdit);
         locationEdit = view.findViewById(R.id.todo_locationInputEdit);
+//        completedSwitch = view.findViewById(R.id.todo_completed_switch);
     }
 
 
