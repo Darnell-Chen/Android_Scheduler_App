@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         courseViewModel.setCourseList(new ArrayList<>());
 
         todoViewModel = new ViewModelProvider(this).get(TodoListViewModel.class);
-        courseViewModel.setCourseList(new ArrayList<>());
+        todoViewModel.setTodoList(new ArrayList<>());
 
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());

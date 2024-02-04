@@ -1,4 +1,4 @@
-package com.example.cs2340proj1.ui.courses;
+package com.example.cs2340proj1.ui.todo;
 
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
@@ -18,30 +18,31 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cs2340proj1.R;
+import com.example.cs2340proj1.ui.courses.CourseEditorFragment;
+import com.example.cs2340proj1.ui.courses.CourseInfo;
+import com.example.cs2340proj1.ui.courses.CourseViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class CourseEditorFragment extends BottomSheetDialogFragment {
+public class TodoEditorFragment extends BottomSheetDialogFragment {
 
-    Button addButton, startButton, endButton, deleteButton;
-    EditText courseEdit, professorEdit, locationEdit;
+    Button addButton, dateButton, timeButton, deleteButton;
+    EditText nameEdit, courseEdit, locationEdit;
     int hour, minute;
-    CourseInfo newCourse;
-    CourseViewModel viewModel;
-
-
+    TodoInfo newTodo;
+    TodoListViewModel viewModel;
     int currPosition = -1;
 
-    public CourseEditorFragment() {
+    public TodoEditorFragment() {
     }
 
-    public static Fragment newInstance(ArrayList<CourseInfo> currCourseList, int currIndex)
+    public static Fragment newInstance(ArrayList<TodoInfo> currTodoList, int currIndex)
     {
-        CourseEditorFragment myFragment = new CourseEditorFragment();
+        TodoEditorFragment myFragment = new TodoEditorFragment();
         Bundle args = new Bundle();
-        args.putSerializable("currList", currCourseList);
+        args.putSerializable("currList", currTodoList);
         args.putInt("currPosition", currIndex);
         myFragment.setArguments(args);
         return myFragment;
@@ -50,9 +51,8 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.card_editor, container, false);
+        View view = inflater.inflate(R.layout.todo_editor, container, false);
 
-        // simply instantiates all of the buttons and EditText
         findLayout(view);
 
         if (getArguments() != null) {
@@ -63,22 +63,20 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
             @Override
             public void onClick(View v) {
 
-                String courseName = courseEdit.getText().toString();
-                String professor = professorEdit.getText().toString();
-                String startTime = startButton.getText().toString();
-                String endTime = endButton.getText().toString();
+                String todoName = nameEdit.getText().toString();
+                String date = dateButton.getText().toString();
+                String course = courseEdit.getText().toString();
+                String time = timeButton.getText().toString();
                 String location = locationEdit.getText().toString();
 
-                String[] dates = getDates(view);
+                newTodo = new TodoInfo(todoName, date, course, time, location);
 
-                newCourse = new CourseInfo(courseName, professor, startTime, endTime, dates, location);
-
-                viewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
+                viewModel = new ViewModelProvider(requireActivity()).get(TodoListViewModel.class);
 
                 if (currPosition > -1) {
-                    viewModel.editCourseInfo(newCourse, currPosition);
+                    viewModel.editTodoInfo(newTodo, currPosition);
                 } else {
-                    viewModel.addCourseInfo(newCourse);
+                    viewModel.addTodoInfo(newTodo);
                 }
 
                 dismiss();
@@ -90,10 +88,10 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
             @Override
             public void onClick(View v) {
 
-                viewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
+                viewModel = new ViewModelProvider(requireActivity()).get(TodoListViewModel.class);
 
                 if (currPosition > -1) {
-                    viewModel.deleteCourseInfo(currPosition);
+                    viewModel.deleteTodoInfo(currPosition);
                 }
                 dismiss();
             }
@@ -102,17 +100,17 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
 
 
         // buttom two onClick Listeners will open the Time Dialog for start and end time buttons
-        startButton.setOnClickListener(new View.OnClickListener() {
+        dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimePickerPopup(startButton);
+                TimePickerPopup(dateButton);
             }
         });
 
-        endButton.setOnClickListener(new View.OnClickListener() {
+        timeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimePickerPopup(endButton);
+                TimePickerPopup(timeButton);
             }
         });
 
@@ -148,50 +146,26 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
     private void setLayout() {
         currPosition = getArguments().getInt("currPosition");
 
-        ArrayList<CourseInfo> courseList = (ArrayList<CourseInfo>) getArguments().getSerializable("currList");
-        CourseInfo currCourse = courseList.get(currPosition);
+        ArrayList<TodoInfo> todoList = (ArrayList<TodoInfo>) getArguments().getSerializable("currList");
+        TodoInfo currTodo = todoList.get(currPosition);
 
-        professorEdit.setText(currCourse.getProfessor());
-        courseEdit.setText(currCourse.getCourseName());
-        locationEdit.setText(currCourse.getLocation());
-        startButton.setText(currCourse.getStartTime());
-        endButton.setText(currCourse.getEndTime());
+        nameEdit.setText(currTodo.getTodoName());
+        courseEdit.setText(currTodo.getCourse());
+        locationEdit.setText(currTodo.getLocation());
+        dateButton.setText(currTodo.getDate());
 
         deleteButton.setText("Delete");
     }
 
     private void findLayout(View view) {
-        addButton = view.findViewById(R.id.save_card_edit);
-        deleteButton = view.findViewById(R.id.cancel_card_edit);
-        startButton = view.findViewById(R.id.start_time_button);
-        endButton = view.findViewById(R.id.end_time_button);
+        addButton = view.findViewById(R.id.todo_save_card_edit);
+        deleteButton = view.findViewById(R.id.todo_cancel_card_edit);
+        dateButton = view.findViewById(R.id.todo_date);
+        timeButton = view.findViewById(R.id.todo_start_time_button);
 
-        courseEdit = view.findViewById(R.id.courseInputEdit);
-        professorEdit = view.findViewById(R.id.professorInputEdit);
-        locationEdit = view.findViewById(R.id.locationInputEdit);
-    }
-
-
-    private String[] getDates(View view) {
-        String[] dates = new String[5];
-
-        Switch monSwitch = view.findViewById(R.id.mon_switch);
-        Switch tuesSwitch = view.findViewById(R.id.tue_switch);
-        Switch wedSwitch = view.findViewById(R.id.wed_switch);
-        Switch thurSwitch = view.findViewById(R.id.thur_switch);
-        Switch friSwitch = view.findViewById(R.id.fri_switch);
-
-
-        // ternary operators where 1 = true, 0 = false
-        // depending on if the switch for that date is on or off, each element in the string
-        // is set to 0 or 1
-        dates[0] = (monSwitch.isChecked()) ? " Mon " : "";
-        dates[1] = (tuesSwitch.isChecked()) ? " Tues " : "";
-        dates[2] = (wedSwitch.isChecked()) ? " Wed " : "";
-        dates[3] = (thurSwitch.isChecked()) ? " Thurs " : "";
-        dates[4] = (friSwitch.isChecked()) ? " Fri " : "";
-
-        return dates;
+        nameEdit = view.findViewById(R.id.todoInputEdit);
+        courseEdit = view.findViewById(R.id.todo_courseInputEdit);
+        locationEdit = view.findViewById(R.id.todo_locationInputEdit);
     }
 
 
@@ -212,5 +186,7 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
         TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), onTimeSetListener, hour, minute, true);
         timePickerDialog.show();
     }
+
+
 
 }

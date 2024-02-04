@@ -27,4 +27,8 @@
     <string name="card_layout_professor">professor</string>
     <string name="cancel_card_editor">cancel</string>
     <string name="to">to</string>
+    <string name="todo_date_string">date</string>
+    <string name="assignment_task_string">Assignment / Task</string>
+    <string name="assignment_you_need_to_complete_string">Assignment You Need to Complete</string>
+    <string name="todo_title">todo title</string>
 </resources>

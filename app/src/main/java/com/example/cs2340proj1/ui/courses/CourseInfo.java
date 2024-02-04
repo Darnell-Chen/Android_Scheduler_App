@@ -1,7 +1,5 @@
 package com.example.cs2340proj1.ui.courses;
 
-import android.annotation.SuppressLint;
-
 public class CourseInfo {
     private String courseName, professor, startTime, endTime, location;
     String[] date;

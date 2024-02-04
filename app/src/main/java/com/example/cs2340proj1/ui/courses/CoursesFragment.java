@@ -1,12 +1,9 @@
 package com.example.cs2340proj1.ui.courses;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cs2340proj1.R;
 import com.example.cs2340proj1.databinding.FragmentCoursesBinding;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -27,12 +23,9 @@ public class CoursesFragment extends Fragment {
     // Note: xml layouts automatically generate an object class that corresponds to the layout
     // you just have to implement it
     private FragmentCoursesBinding binding;
-
     private ArrayList<CourseInfo> courseList;
-
     CourseEditorFragment courseEditorFragment;
     CourseViewModel viewModel;
-
     CourseAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -52,7 +45,6 @@ public class CoursesFragment extends Fragment {
         viewModel.getCourseList().observe(getViewLifecycleOwner(), new Observer<ArrayList<CourseInfo>>() {
             @Override
             public void onChanged(ArrayList<CourseInfo> newData) {
-                // This will destroy the course editor layout if we click on another tab
                 courseList = viewModel.getCourseList().getValue();
                 adapter.setCourseList(courseList);
             }

@@ -2,15 +2,12 @@ package com.example.cs2340proj1.ui.courses;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 
 public class CourseViewModel extends ViewModel {
-
     private MutableLiveData<ArrayList<CourseInfo>> courseList = new MutableLiveData<ArrayList<CourseInfo>>();
-
 
     public LiveData<ArrayList<CourseInfo>> getCourseList() {
         return courseList;

@@ -27,7 +27,7 @@ public class TodoInfo {
         return course;
     }
 
-    public String getEndTime() {
+    public String getTime() {
         return time;
     }
 
