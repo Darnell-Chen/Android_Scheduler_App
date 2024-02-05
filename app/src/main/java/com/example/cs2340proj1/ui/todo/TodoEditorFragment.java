@@ -91,22 +91,11 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(getContext())
-                        .setTitle("Delete Confirmation")
-                        .setMessage("Are you sure you want to delete this?")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Continue with delete operation
-                                viewModel = new ViewModelProvider(requireActivity()).get(TodoListViewModel.class);
-                                if (currPosition > -1) {
-                                    viewModel.deleteTodoInfo(currPosition);
-                                }
-                                dismiss();
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, null)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
+                if (deleteButton.getText().equals("Delete")) {
+                    deleteDialog();
+                } else {
+                    dismiss();
+                }
             }
         });
 
@@ -122,29 +111,23 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
         return view;
     }
 
-    public boolean[] confirmationDialog() {
 
-        final boolean[] returnedBoolean = new boolean[1];
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which){
-                    case DialogInterface.BUTTON_POSITIVE:
-                        returnedBoolean[0] = true;
-                        break;
-
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        returnedBoolean[0] = false;
-                        break;
-                }
-            }
-        };
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
-        builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener).show();
-
-        return returnedBoolean;
+    private void deleteDialog() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Delete Confirmation")
+                .setMessage("Are you sure you want to delete this?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Continue with delete operation
+                        if (currPosition > -1) {
+                            viewModel.deleteTodoInfo(currPosition);
+                        }
+                        dismiss();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
 
