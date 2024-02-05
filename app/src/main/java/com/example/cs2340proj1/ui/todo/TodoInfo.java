@@ -3,10 +3,10 @@ package com.example.cs2340proj1.ui.todo;
 public class TodoInfo {
 
     private String todoName, date, course, location, type;
-    private boolean completed; // Field to indicate if the task is completed
+    private boolean completed;
 
     public TodoInfo(String pTodoName, String pDate, String pCourse,
-                    String pLocation, String pType) {
+                    String pLocation, String pType, boolean pCompleted) {
 
 
         this.todoName = pTodoName;
@@ -14,7 +14,12 @@ public class TodoInfo {
         this.course = pCourse;
         this.location = pLocation;
         this.type = pType;
-//        this.completed = pCompleted;
+        this.completed = pCompleted;
+    }
+
+    public TodoInfo(String pTodoName, String pDate, String pCourse,
+                    String pLocation, String pType) {
+        this(pTodoName, pDate, pCourse, pLocation, pType, false);
     }
 
     public String getTodoName() {

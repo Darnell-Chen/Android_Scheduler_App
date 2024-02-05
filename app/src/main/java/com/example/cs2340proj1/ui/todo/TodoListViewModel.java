@@ -9,6 +9,10 @@ import java.util.ArrayList;
 public class TodoListViewModel extends ViewModel {
     private MutableLiveData<ArrayList<TodoInfo>> todoList = new MutableLiveData<ArrayList<TodoInfo>>();
 
+    private boolean completedFilter = false;
+    private boolean dateFilter = false;
+    private boolean courseFilter = false;
+
     public LiveData<ArrayList<TodoInfo>> getTodoList() {
         return todoList;
     }
@@ -40,5 +44,11 @@ public class TodoListViewModel extends ViewModel {
             currentList.remove(currIndex);
         }
         todoList.setValue(currentList);
+    }
+
+    public void setFilter(boolean completed, boolean date, boolean course) {
+        this.completedFilter = completed;
+        this.dateFilter = date;
+        this.courseFilter = course;
     }
 }
