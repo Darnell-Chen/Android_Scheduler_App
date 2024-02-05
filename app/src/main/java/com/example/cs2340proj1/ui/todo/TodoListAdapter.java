@@ -24,9 +24,12 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private static final int TYPE_ASSIGNMENT = 0;
     private static final int TYPE_EXAM = 1;
 
-    public TodoListAdapter(Context context, ArrayList<TodoInfo> inputCourses) {
+    private TodoListViewModel viewModel;
+
+    public TodoListAdapter(Context context, ArrayList<TodoInfo> inputCourses, TodoListViewModel viewModel) {
         this.myTodoList = inputCourses;
         this.context = context;
+        this.viewModel = viewModel;
     }
 
     @Override

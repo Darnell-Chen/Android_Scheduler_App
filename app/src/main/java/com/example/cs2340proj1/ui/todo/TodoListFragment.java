@@ -26,7 +26,6 @@ public class TodoListFragment extends Fragment {
     private FragmentTodoListBinding binding;
     private TodoListViewModel viewModel;
     TodoEditorFragment todoEditorFragment;
-
     TodoFilterFragment todoFilterFragment;
     ArrayList<TodoInfo> todoList;
     TodoListAdapter adapter;
@@ -57,7 +56,7 @@ public class TodoListFragment extends Fragment {
 
         todoList = new ArrayList<TodoInfo>();
 
-        adapter = new TodoListAdapter(this.getContext(), todoList);
+        adapter = new TodoListAdapter(this.getContext(), todoList, viewModel);
 
         // finds the recycler view and sets its adapter - which will funnel the data
         RecyclerView myRecycler = binding.todoRecyclerview;
