@@ -50,9 +50,4 @@ public class TodoInfo {
         this.completed = completed;
     }
 
-    // Function to compare by task completion
-    public static int compareByCompletion(TodoInfo todo1, TodoInfo todo2) {
-        return Boolean.compare(todo1.completed, todo2.completed);
-    }
-
 }
