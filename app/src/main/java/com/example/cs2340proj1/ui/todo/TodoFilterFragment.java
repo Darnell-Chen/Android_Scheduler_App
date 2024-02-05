@@ -135,11 +135,11 @@ public class TodoFilterFragment extends BottomSheetDialogFragment{
         }
 
         if (initialExam != examSwitch.isChecked()) {
-            viewModel.setCourseFilter(examSwitch.isChecked());
+            viewModel.setExamFilter(examSwitch.isChecked());
         }
 
         if (initialAssignment != assignmentSwitch.isChecked()) {
-            viewModel.setCourseFilter(courseSwitch.isChecked());
+            viewModel.setAssignmentFilter(assignmentSwitch.isChecked());
         }
     }
 }
