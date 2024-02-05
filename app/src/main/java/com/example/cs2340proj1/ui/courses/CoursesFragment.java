@@ -23,11 +23,10 @@ public class CoursesFragment extends Fragment {
     // Note: xml layouts automatically generate an object class that corresponds to the layout
     // you just have to implement it
     private FragmentCoursesBinding binding;
-
     private ArrayList<CourseInfo> courseList;
-
     CourseEditorFragment courseEditorFragment;
     CourseViewModel viewModel;
+    CourseAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -39,17 +38,17 @@ public class CoursesFragment extends Fragment {
         // This will grab the view model that was created in main activity.
         viewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
 
+        initializeCardView(root);
+
+        // This is the viewmodel observer. It will be notified everytime there is a charge to the
+        // list in the viewmodel
         viewModel.getCourseList().observe(getViewLifecycleOwner(), new Observer<ArrayList<CourseInfo>>() {
             @Override
             public void onChanged(ArrayList<CourseInfo> newData) {
-                // Handle the updated data here
-                // newData contains the updated list of courses
-                // Update your RecyclerView or UI with the new data
+                courseList = viewModel.getCourseList().getValue();
+                adapter.setCourseList(courseList);
             }
         });
-
-
-        initializeCardView(root);
 
         return root;
     }
@@ -62,7 +61,7 @@ public class CoursesFragment extends Fragment {
         courseList = new ArrayList<CourseInfo>();
 
         // CourseAdapter will update the information in card
-        CourseAdapter adapter = new CourseAdapter(this, courseList);
+        adapter = new CourseAdapter(this.getContext(), courseList);
 
         // finds the recycler view and sets its adapter - which will funnel the data
         RecyclerView myRecycler = binding.coursesRecyclerview;
@@ -78,25 +77,15 @@ public class CoursesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 courseEditorFragment = new CourseEditorFragment();
-                requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(((ViewGroup) requireView().getParent()).getId(), courseEditorFragment, "findThisFragment")
-                        .addToBackStack(null)
-                        .commit();
+                courseEditorFragment.show(getParentFragmentManager(), courseEditorFragment.getTag());
             }
 
         });
     }
 
+
     @Override
     public void onDestroyView() {
-
-        // This will destroy the course editor layout if we click on another tab
-        if (courseEditorFragment != null) {
-            requireActivity().getSupportFragmentManager().beginTransaction()
-                    .remove(courseEditorFragment)
-                    .commit();
-            courseEditorFragment = null; // Set the reference to null to avoid memory leaks
-        }
 
         super.onDestroyView();
         binding = null;

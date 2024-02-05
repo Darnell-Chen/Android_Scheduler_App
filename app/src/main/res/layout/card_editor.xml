@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:padding="20dp"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:backgroundTint="@color/white">
 
     <TextView
         android:id="@+id/courseInputText"
@@ -55,6 +56,33 @@
         <Space
             android:layout_width="0dp"
             android:layout_height="1dp"
+            android:layout_weight="0.4" >
+        </Space>
+
+        <Switch
+            android:id="@+id/mon_switch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/monday_String" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="0.5" >
+        </Space>
+
+
+        <Switch
+            android:id="@+id/tue_switch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/tuesday_String" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
             android:layout_weight="0.5" >
         </Space>
 
@@ -66,24 +94,10 @@
             android:layout_weight="1"
             android:text="@string/wednesday_String" />
 
-        <Switch
-            android:id="@+id/thur_switch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/thursday_String" />
-
-        <Switch
-            android:id="@+id/fri_switch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/friday_String" />
-
         <Space
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_weight="0.5" >
+            android:layout_weight="0.4" >
         </Space>
 
     </LinearLayout>
@@ -104,19 +118,24 @@
         </Space>
 
         <Switch
-            android:id="@+id/mon_switch"
+            android:id="@+id/thur_switch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/monday_String" />
+            android:text="@string/thursday_String" />
 
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="0.5" >
+        </Space>
 
         <Switch
-            android:id="@+id/tue_switch"
+            android:id="@+id/fri_switch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/tuesday_String" />
+            android:text="@string/friday_String" />
 
         <Space
             android:layout_width="0dp"
