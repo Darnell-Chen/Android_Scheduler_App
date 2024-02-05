@@ -9,7 +9,7 @@
 
 
     <Switch
-        android:id="@+id/switch3"
+        android:id="@+id/dateSwitch"
         android:paddingTop="15dp"
         android:paddingBottom="10dp"
         android:paddingLeft="100dp"
@@ -20,7 +20,7 @@
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <Switch
-        android:id="@+id/switch2"
+        android:id="@+id/courseSwitch"
         android:paddingTop="15dp"
         android:paddingBottom="10dp"
         android:paddingLeft="100dp"
@@ -31,7 +31,7 @@
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/completedSwitch"
         android:paddingTop="15dp"
         android:paddingBottom="10dp"
         android:paddingLeft="100dp"
@@ -54,13 +54,15 @@
             android:layout_weight="1"/>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/todo_set_filter"
             android:paddingTop="15dp"
             android:paddingBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Set Filters"
             android:layout_weight="1"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/time_button_color"
             android:gravity="center"/>
 
         <Space

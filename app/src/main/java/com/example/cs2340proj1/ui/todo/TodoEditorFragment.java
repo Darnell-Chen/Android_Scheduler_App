@@ -52,6 +52,8 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
         int layoutId = type.equals("assignment") ? R.layout.todo_assignment_editor : R.layout.todo_exam_editor;
         View view = inflater.inflate(layoutId, container, false);
 
+        viewModel = new ViewModelProvider(requireActivity()).get(TodoListViewModel.class);
+
         // always have this before setLayout() since this will find the components that setLayout uses
         findLayout(view, type);
 
@@ -74,8 +76,6 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
                 String location = (type.equals("exam")) ? locationEdit.getText().toString() : "";
 
                 newTodo = new TodoInfo(todoName, date, course, location, type);
-
-                viewModel = new ViewModelProvider(requireActivity()).get(TodoListViewModel.class);
 
                 if (currPosition > -1) {
                     viewModel.editTodoInfo(newTodo, currPosition);

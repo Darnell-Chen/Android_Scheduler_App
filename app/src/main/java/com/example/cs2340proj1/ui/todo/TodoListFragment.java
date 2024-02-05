@@ -26,6 +26,8 @@ public class TodoListFragment extends Fragment {
     private FragmentTodoListBinding binding;
     private TodoListViewModel viewModel;
     TodoEditorFragment todoEditorFragment;
+
+    TodoFilterFragment todoFilterFragment;
     ArrayList<TodoInfo> todoList;
     TodoListAdapter adapter;
 
@@ -71,6 +73,15 @@ public class TodoListFragment extends Fragment {
             }
         });
 
+        FloatingActionButton filterTodoButton = root.findViewById(R.id.filter_todo_button);
+
+        filterTodoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openTodoFilter();
+            }
+        });
+
     }
 
     private void showAddTodoOptions() {
@@ -94,6 +105,11 @@ public class TodoListFragment extends Fragment {
     private void openTodoEditor(String type) {
         todoEditorFragment = TodoEditorFragment.newInstance(new ArrayList<>(), -1, type);
         todoEditorFragment.show(getParentFragmentManager(), todoEditorFragment.getTag());
+    }
+
+    private void openTodoFilter() {
+        todoFilterFragment = new TodoFilterFragment();
+        todoFilterFragment.show(getParentFragmentManager(), todoFilterFragment.getTag());
     }
 
     @Override
