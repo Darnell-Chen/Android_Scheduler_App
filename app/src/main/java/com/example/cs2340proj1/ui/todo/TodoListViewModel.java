@@ -83,10 +83,12 @@ public class TodoListViewModel extends ViewModel {
 
     public void setExamFilter(boolean exam) {
         this.examFilter = exam;
+        todoList.setValue(todoList.getValue());
     }
 
     public void setAssignmentFilter(boolean assignment) {
         this.assignmentFilter = assignment;
+        todoList.setValue(todoList.getValue());
     }
 
     public boolean getDateFilter() {

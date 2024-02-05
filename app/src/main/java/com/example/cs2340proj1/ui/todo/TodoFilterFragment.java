@@ -138,6 +138,9 @@ public class TodoFilterFragment extends BottomSheetDialogFragment{
             viewModel.setExamFilter(examSwitch.isChecked());
         }
 
+        System.out.println("initial value: " + initialAssignment);
+        System.out.println("new value: " + assignmentSwitch.isChecked());
+
         if (initialAssignment != assignmentSwitch.isChecked()) {
             viewModel.setAssignmentFilter(assignmentSwitch.isChecked());
         }
