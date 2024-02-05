@@ -50,6 +50,14 @@ public class TodoListViewModel extends ViewModel {
         todoList.setValue(currentList);
     }
 
+    public void updateTodoCompletion(TodoInfo todoInfo, int currIndex) {
+        ArrayList<TodoInfo> currentList = todoList.getValue();
+        if (currentList != null) {
+            currentList.set(currIndex, todoInfo);
+        }
+        setTodoList(currentList);
+    }
+
     public void setCompletedFilter(boolean completed) {
         this.completedFilter = completed;
     }
