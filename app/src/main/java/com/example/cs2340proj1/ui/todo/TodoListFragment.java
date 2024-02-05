@@ -92,7 +92,7 @@ public class TodoListFragment extends Fragment {
     }
 
     private void openTodoEditor(String type) {
-        TodoEditorFragment todoEditorFragment = TodoEditorFragment.newInstance(new ArrayList<>(), -1, type);
+        todoEditorFragment = TodoEditorFragment.newInstance(new ArrayList<>(), -1, type);
         todoEditorFragment.show(getParentFragmentManager(), todoEditorFragment.getTag());
     }
 

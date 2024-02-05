@@ -52,6 +52,9 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
         int layoutId = type.equals("assignment") ? R.layout.todo_assignment_editor : R.layout.todo_exam_editor;
         View view = inflater.inflate(layoutId, container, false);
 
+        // always have this before setLayout() since this will find the components that setLayout uses
+        findLayout(view, type);
+
         if (args != null) {
             currPosition = args.getInt("currPosition");
             ArrayList<TodoInfo> todoList = (ArrayList<TodoInfo>) args.getSerializable("currList");
@@ -59,8 +62,6 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
                 setLayout(todoList.get(currPosition), type);
             }
         }
-
-        findLayout(view, type);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
