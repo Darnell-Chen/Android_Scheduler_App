@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="30dp"
+    android:paddingBottom="30dp">
+
+
+    <Switch
+        android:id="@+id/switch3"
+        android:paddingTop="15dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Switch
+        android:id="@+id/switch2"
+        android:paddingTop="15dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Course"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:paddingTop="15dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Completed"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+
+    <LinearLayout
+        android:paddingTop="30dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_height="0dp"
+            android:layout_width="200dp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/button"
+            android:paddingTop="15dp"
+            android:paddingBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Set Filters"
+            android:layout_weight="1"
+            android:gravity="center"/>
+
+        <Space
+            android:layout_height="0dp"
+            android:layout_width="200dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
