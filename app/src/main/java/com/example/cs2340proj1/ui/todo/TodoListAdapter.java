@@ -68,14 +68,8 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void checkIfFiltered(RecyclerView.ViewHolder newHolder, int todoType, boolean todoCompleted) {
-
-        checkIfFilteredHelper(viewModel.getAssignmentFilter(), (todoType == TYPE_ASSIGNMENT), newHolder);
-        checkIfFilteredHelper(viewModel.getExamFilter(), (todoType == TYPE_EXAM), newHolder);
-        checkIfFilteredHelper(viewModel.getCompletedFilter(), todoCompleted, newHolder);
-    }
-
-    private void checkIfFilteredHelper(boolean bool_1, boolean bool_2, RecyclerView.ViewHolder newHolder) {
-        if (bool_1 && bool_2) {
+        System.out.println("my viewmodel assignment return " + viewModel.getAssignmentFilter());
+        if (viewModel.getAssignmentFilter() && (todoType == TYPE_ASSIGNMENT)) {
             newHolder.itemView.setVisibility(View.INVISIBLE);
             newHolder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
         } else {
@@ -83,6 +77,23 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             newHolder.itemView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
     }
+
+//    private void checkIfFiltered(RecyclerView.ViewHolder newHolder, int todoType, boolean todoCompleted) {
+//
+//        checkIfFilteredHelper(viewModel.getAssignmentFilter(), (todoType == TYPE_ASSIGNMENT), newHolder);
+//        checkIfFilteredHelper(viewModel.getExamFilter(), (todoType == TYPE_EXAM), newHolder);
+//        checkIfFilteredHelper(viewModel.getCompletedFilter(), todoCompleted, newHolder);
+//    }
+//
+//    private void checkIfFilteredHelper(boolean bool_1, boolean bool_2, RecyclerView.ViewHolder newHolder) {
+//        if (bool_1 && bool_2) {
+//            newHolder.itemView.setVisibility(View.INVISIBLE);
+//            newHolder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+//        } else {
+//            newHolder.itemView.setVisibility(View.VISIBLE);
+//            newHolder.itemView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+//        }
+//    }
 
     public void setTodoList(ArrayList<TodoInfo> newList) {
         myTodoList = newList;
