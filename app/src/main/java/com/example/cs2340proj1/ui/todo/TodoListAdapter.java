@@ -73,7 +73,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         private ImageButton editButton;
         private ArrayList<TodoInfo> todoList;
         private Context context;
-        private CheckBox todoCheckbox;
+        private CheckBox todoCheckbox; // Added
 
 
         public AssignmentViewHolder(View itemView, Context context, ArrayList<TodoInfo> todoList) {
@@ -84,14 +84,14 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             course = itemView.findViewById(R.id.assignment_todo_card_course);
             date = itemView.findViewById(R.id.assignment_todo_card_date);
             editButton = itemView.findViewById(R.id.assignment_todo_edit_button);
-            todoCheckbox = itemView.findViewById(R.id.assignmentTodoCheckBox);
+            todoCheckbox = itemView.findViewById(R.id.assignmentTodoCheckBox); // Added
         }
 
         void bindData(TodoInfo currTodoInfo, int position) {
             name.setText(currTodoInfo.getTodoName());
             course.setText(currTodoInfo.getCourse());
             date.setText(currTodoInfo.getDate());
-            todoCheckbox.setChecked(currTodoInfo.isCompleted());
+            todoCheckbox.setChecked(currTodoInfo.isCompleted()); // Added
 
             editButton.setOnClickListener(v -> {
                 FragmentActivity activity = (FragmentActivity) context;
@@ -99,6 +99,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 todoEditorFragment.show(activity.getSupportFragmentManager(), todoEditorFragment.getTag());
             });
 
+            // Added
             todoCheckbox.setOnClickListener(v -> {
                 boolean isChecked = todoCheckbox.isChecked();
                 currTodoInfo.setCompleted(isChecked);
@@ -115,7 +116,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         private ImageButton editButton;
         private ArrayList<TodoInfo> todoList;
         private Context context;
-        private CheckBox todoCheckbox;
+        private CheckBox todoCheckbox; // Added
 
 
         public ExamViewHolder(View itemView, Context context, ArrayList<TodoInfo> todoList) {
@@ -127,7 +128,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             date = itemView.findViewById(R.id.todo_card_exam_date);
             location = itemView.findViewById(R.id.todo_card_exam_location);
             editButton = itemView.findViewById(R.id.examtodo_edit_button);
-            todoCheckbox = itemView.findViewById(R.id.examTodoCheckBox);
+            todoCheckbox = itemView.findViewById(R.id.examTodoCheckBox); // Added
         }
 
         void bindData(TodoInfo currTodoInfo, int position) {
@@ -135,7 +136,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             course.setText(currTodoInfo.getCourse());
             date.setText(currTodoInfo.getDate());
             location.setText(currTodoInfo.getLocation());
-            todoCheckbox.setChecked(currTodoInfo.isCompleted());
+            todoCheckbox.setChecked(currTodoInfo.isCompleted()); // Added
 
             editButton.setOnClickListener(v -> {
                 FragmentActivity activity = (FragmentActivity) context;
@@ -143,6 +144,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 todoEditorFragment.show(activity.getSupportFragmentManager(), todoEditorFragment.getTag());
             });
 
+            // Added
             todoCheckbox.setOnClickListener(v -> {
                 boolean isChecked = todoCheckbox.isChecked();
                 currTodoInfo.setCompleted(isChecked);
