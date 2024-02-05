@@ -31,4 +31,11 @@
     <string name="assignment_task_string">Assignment / Task</string>
     <string name="assignment_you_need_to_complete_string">Assignment You Need to Complete</string>
     <string name="todo_title">todo title</string>
+    <string name="dueDateHeader">Due Date</string>
+    <string name="exam_task_string">Exam</string>
+    <string name="exam_date">Exam Date</string>
+    <string name="selectDate">Select Date</string>
+    <string name="exam_name">Exam Name</string>
+
+
 </resources>

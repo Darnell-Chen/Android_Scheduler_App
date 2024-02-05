@@ -2,18 +2,18 @@ package com.example.cs2340proj1.ui.todo;
 
 public class TodoInfo {
 
-    private String todoName, date, course, time, location;
+    private String todoName, date, course, location, type;
     private boolean completed; // Field to indicate if the task is completed
 
-    public TodoInfo(String pTodoName, String pDate, String pCourse, String pTime,
-                      String pLocation) {
+    public TodoInfo(String pTodoName, String pDate, String pCourse,
+                    String pLocation, String pType) {
 
 
         this.todoName = pTodoName;
         this.date = pDate;
         this.course = pCourse;
-        this.time = pTime;
         this.location = pLocation;
+        this.type = pType;
 //        this.completed = pCompleted;
     }
 
@@ -29,12 +29,12 @@ public class TodoInfo {
         return course;
     }
 
-    public String getTime() {
-        return time;
-    }
-
     public String getLocation() {
         return location;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public boolean isCompleted() {

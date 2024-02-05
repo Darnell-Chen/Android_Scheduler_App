@@ -1,7 +1,6 @@
 package com.example.cs2340proj1.ui.todo;
 
 import android.app.AlertDialog;
-import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
-import android.widget.TimePicker;
+import android.app.DatePickerDialog;
+import android.widget.DatePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,19 +17,16 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cs2340proj1.R;
-import com.example.cs2340proj1.ui.courses.CourseEditorFragment;
-import com.example.cs2340proj1.ui.courses.CourseInfo;
-import com.example.cs2340proj1.ui.courses.CourseViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Locale;
 
 public class TodoEditorFragment extends BottomSheetDialogFragment {
 
-    Button addButton, dateButton, timeButton, deleteButton;
+    Button addButton, dateButton, deleteButton;
     EditText nameEdit, courseEdit, locationEdit;
-    int hour, minute;
     TodoInfo newTodo;
     TodoListViewModel viewModel;
     int currPosition = -1;
@@ -38,39 +34,45 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
     public TodoEditorFragment() {
     }
 
-    public static Fragment newInstance(ArrayList<TodoInfo> currTodoList, int currIndex)
-    {
+    public static TodoEditorFragment newInstance(ArrayList<TodoInfo> currTodoList, int currIndex, String type) {
         TodoEditorFragment myFragment = new TodoEditorFragment();
         Bundle args = new Bundle();
         args.putSerializable("currList", currTodoList);
         args.putInt("currPosition", currIndex);
+        args.putString("type", type);
         myFragment.setArguments(args);
         return myFragment;
     }
 
+
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.todo_editor, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {Bundle args = getArguments();
+        String type = args != null ? args.getString("type", "assignment") : "assignment";
+        int layoutId = type.equals("assignment") ? R.layout.todo_assignment_editor : R.layout.todo_exam_editor;
+        View view = inflater.inflate(layoutId, container, false);
 
-        findLayout(view);
-
-        if (getArguments() != null) {
-            setLayout();
+        if (args != null) {
+            currPosition = args.getInt("currPosition");
+            ArrayList<TodoInfo> todoList = (ArrayList<TodoInfo>) args.getSerializable("currList");
+            if (todoList != null && currPosition >= 0 && currPosition < todoList.size()) {
+                setLayout(todoList.get(currPosition), type);
+            }
         }
+
+        findLayout(view, type);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String type = args != null ? args.getString("type", "assignment") : "assignment";
 
                 String todoName = nameEdit.getText().toString();
                 String date = dateButton.getText().toString();
                 String course = courseEdit.getText().toString();
-                String time = timeButton.getText().toString();
-                String location = locationEdit.getText().toString();
-//                boolean completed = completedSwitch.isChecked();
+                String location = (type.equals("exam")) ? locationEdit.getText().toString() : "";
 
-                newTodo = new TodoInfo(todoName, date, course, time, location);
+                newTodo = new TodoInfo(todoName, date, course, location, type);
 
                 viewModel = new ViewModelProvider(requireActivity()).get(TodoListViewModel.class);
 
@@ -108,21 +110,13 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
         });
 
 
-
-        // buttom two onClick Listeners will open the Time Dialog for start and end time buttons
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimePickerPopup(dateButton);
+                DatePickerPopup(dateButton);
             }
         });
 
-        timeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TimePickerPopup(timeButton);
-            }
-        });
 
         return view;
     }
@@ -153,52 +147,57 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
     }
 
 
-    private void setLayout() {
-        currPosition = getArguments().getInt("currPosition");
-
-        ArrayList<TodoInfo> todoList = (ArrayList<TodoInfo>) getArguments().getSerializable("currList");
-        TodoInfo currTodo = todoList.get(currPosition);
-
+    private void setLayout(TodoInfo currTodo, String type) {
         nameEdit.setText(currTodo.getTodoName());
         courseEdit.setText(currTodo.getCourse());
-        locationEdit.setText(currTodo.getLocation());
         dateButton.setText(currTodo.getDate());
-        timeButton.setText(currTodo.getTime());
+
+        // Handle location field for exams
+        if (type.equals("exam")) {
+            locationEdit.setText(currTodo.getLocation());
+        } else if (locationEdit != null) {
+            locationEdit.setVisibility(View.GONE);
+        }
 
         deleteButton.setText("Delete");
     }
 
-    private void findLayout(View view) {
-        addButton = view.findViewById(R.id.todo_save_card_edit);
-        deleteButton = view.findViewById(R.id.todo_cancel_card_edit);
-        dateButton = view.findViewById(R.id.todo_date);
-        timeButton = view.findViewById(R.id.todo_start_time_button);
+    private void findLayout(View view, String type) {
+        if (type.equals("assignment")) {
+            addButton = view.findViewById(R.id.assignmenttodo_save_card_edit);
+            deleteButton = view.findViewById(R.id.assignmenttodo_cancel_card_edit);
+            dateButton = view.findViewById(R.id.assignmenttodo_date);
 
-        nameEdit = view.findViewById(R.id.todoInputEdit);
-        courseEdit = view.findViewById(R.id.todo_courseInputEdit);
-        locationEdit = view.findViewById(R.id.todo_locationInputEdit);
-//        completedSwitch = view.findViewById(R.id.todo_completed_switch);
+            nameEdit = view.findViewById(R.id.assignmenttodoInputEdit);
+            courseEdit = view.findViewById(R.id.assignmenttodo_courseInputEdit);
+        } else {
+            addButton = view.findViewById(R.id.examtodo_save_card_edit);
+            deleteButton = view.findViewById(R.id.examtodo_cancel_card_edit);
+            dateButton = view.findViewById(R.id.examtodo_date);
+
+            nameEdit = view.findViewById(R.id.examtodoInputEdit);
+            courseEdit = view.findViewById(R.id.examtodo_courseInputEdit);
+            locationEdit = view.findViewById(R.id.examtodo_locationInputEdit);
+        }
     }
 
-
-
-
-    // the method that creates a TimePickerDialog
-    public void TimePickerPopup(Button currButton) {
-        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                hour = selectedHour;
-                minute = selectedMinute;
-
-                currButton.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute));
-
+    public void DatePickerPopup(Button dateButton) {
+        DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                // Note: Month value is 0-based. January is 0.
+                String selectedDate = String.format(Locale.getDefault(), "%04d-%02d-%02d", year, month + 1, dayOfMonth);
+                dateButton.setText(selectedDate);
             }
         };
 
-        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), onTimeSetListener, hour, minute, true);
-        timePickerDialog.show();
+        // Use the current date as the default date in the picker
+        final Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), onDateSetListener, year, month, day);
+        datePickerDialog.show();
     }
-
-
-
 }
