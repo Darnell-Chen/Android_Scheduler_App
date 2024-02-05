@@ -23,7 +23,6 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private Context context;
     private static final int TYPE_ASSIGNMENT = 0;
     private static final int TYPE_EXAM = 1;
-
     private TodoListViewModel viewModel;
 
     public TodoListAdapter(Context context, ArrayList<TodoInfo> inputCourses, TodoListViewModel viewModel) {
@@ -44,10 +43,12 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         View view;
         if (viewType == TYPE_ASSIGNMENT) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.assignment_card_layout, parent, false);
-            return new AssignmentViewHolder(view, context, myTodoList);
+            AssignmentViewHolder newHolder = new AssignmentViewHolder(view, context, myTodoList);
+            return checkIfFiltered(newHolder, TYPE_ASSIGNMENT);
         } else {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.exam_card_layout, parent, false);
-            return new ExamViewHolder(view, context, myTodoList);
+            ExamViewHolder newHolder = new ExamViewHolder(view, context, myTodoList);
+            return checkIfFiltered(newHolder, TYPE_EXAM);
         }
     }
 
@@ -64,6 +65,18 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public int getItemCount() {
         return myTodoList.size();
+    }
+
+    private RecyclerView.ViewHolder checkIfFiltered(RecyclerView.ViewHolder newHolder, int todoType) {
+        if (viewModel.getAssignmentFilter() && (todoType == TYPE_ASSIGNMENT)) {
+            newHolder.itemView.setVisibility(View.GONE);
+            newHolder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+        }
+        if (viewModel.getExamFilter() && (todoType == TYPE_EXAM)) {
+            newHolder.itemView.setVisibility(View.GONE);
+            newHolder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+        }
+        return newHolder;
     }
 
     public void setTodoList(ArrayList<TodoInfo> newList) {
