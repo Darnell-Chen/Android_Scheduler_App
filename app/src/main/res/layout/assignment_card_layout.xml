@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:backgroundTint="@color/card_background_color"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/card_text_color"
+        android:orientation="horizontal"
+        android:padding="26dp">
+
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:paddingEnd="2dp">
+
+            <CheckBox
+                android:id="@+id/assignmentTodoCheckBox"
+                android:layout_width="48dp"
+                android:layout_height="48dp" />
+
+        </LinearLayout>>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/card_text_color"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/assignment_todo_card_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00AA4C4C"
+                android:backgroundTint="#00AA2525"
+                android:text="@string/assignment_task_string"
+                android:textAllCaps="true"
+                android:textColor="@color/card_text_color"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/assignment_todo_card_course"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/courseCard"
+                android:textColor="@color/card_text_color"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/assignment_todo_card_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/dueDateHeader"
+                android:textColor="@color/card_text_color"
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:gravity="bottom">
+
+            <ImageButton
+                android:id="@+id/assignment_todo_edit_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:backgroundTint="#00FFFFFF"
+                android:src="@drawable/edit_icon"
+                app:tint="@color/time_button_color"
+                card_view:ignore="InefficientWeight" />
+
+
+        </LinearLayout>>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
