@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="30dp"
+    android:paddingBottom="30dp">
+
+
+    <Switch
+        android:id="@+id/dateSwitch"
+        android:paddingTop="15dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sort by Date"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Switch
+        android:id="@+id/courseSwitch"
+        android:paddingTop="15dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sort by Course"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Switch
+        android:id="@+id/completedSwitch"
+        android:paddingTop="15dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hide Completed"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Switch
+        android:id="@+id/examSwitch"
+        android:paddingTop="15dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Filter Out Exams"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Switch
+        android:id="@+id/assignmentSwitch"
+        android:paddingTop="15dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Filter Out Assignments"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+
+    <LinearLayout
+        android:paddingTop="30dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_height="0dp"
+            android:layout_width="200dp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/todo_set_filter"
+            android:paddingTop="15dp"
+            android:paddingBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Set Filters"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/time_button_color"
+            android:gravity="center"/>
+
+        <Space
+            android:layout_height="0dp"
+            android:layout_width="200dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

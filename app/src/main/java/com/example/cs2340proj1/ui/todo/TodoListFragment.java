@@ -1,6 +1,9 @@
 package com.example.cs2340proj1.ui.todo;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +26,7 @@ public class TodoListFragment extends Fragment {
     private FragmentTodoListBinding binding;
     private TodoListViewModel viewModel;
     TodoEditorFragment todoEditorFragment;
+    TodoFilterFragment todoFilterFragment;
     ArrayList<TodoInfo> todoList;
     TodoListAdapter adapter;
 
@@ -52,7 +56,7 @@ public class TodoListFragment extends Fragment {
 
         todoList = new ArrayList<TodoInfo>();
 
-        adapter = new TodoListAdapter(this.getContext(), todoList);
+        adapter = new TodoListAdapter(this.getContext(), todoList, viewModel);
 
         // finds the recycler view and sets its adapter - which will funnel the data
         RecyclerView myRecycler = binding.todoRecyclerview;
@@ -60,20 +64,52 @@ public class TodoListFragment extends Fragment {
         myRecycler.setAdapter(adapter);
 
 
-
-        // gets floating action button and makes it so bottom sheet (editor) opens
-        // when you click on it
         FloatingActionButton addTodoButton = root.findViewById(R.id.add_todo_button);
         addTodoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                todoEditorFragment = new TodoEditorFragment();
-                todoEditorFragment.show(getParentFragmentManager(), todoEditorFragment.getTag());
+                showAddTodoOptions();
             }
-
         });
+
+        FloatingActionButton filterTodoButton = root.findViewById(R.id.filter_todo_button);
+
+        filterTodoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openTodoFilter();
+            }
+        });
+
     }
 
+    private void showAddTodoOptions() {
+        CharSequence[] options = new CharSequence[]{"Add Assignment", "Add Exam"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Choose an option");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == 0) {
+                    openTodoEditor("assignment");
+                } else {
+                    openTodoEditor("exam");
+                }
+            }
+        });
+        builder.show();
+    }
+
+    private void openTodoEditor(String type) {
+        todoEditorFragment = TodoEditorFragment.newInstance(new ArrayList<>(), -1, type);
+        todoEditorFragment.show(getParentFragmentManager(), todoEditorFragment.getTag());
+    }
+
+    private void openTodoFilter() {
+        todoFilterFragment = new TodoFilterFragment();
+        todoFilterFragment.show(getParentFragmentManager(), todoFilterFragment.getTag());
+    }
 
     @Override
     public void onDestroyView() {

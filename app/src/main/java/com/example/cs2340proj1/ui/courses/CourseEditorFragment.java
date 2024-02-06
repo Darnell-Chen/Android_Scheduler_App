@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cs2340proj1.R;
+import com.example.cs2340proj1.ui.todo.TodoListViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
@@ -57,6 +59,8 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.card_editor, container, false);
 
+        viewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
+
         // simply instantiates all of the buttons and EditText
         findLayout(view);
 
@@ -76,17 +80,20 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
 
                 String[] dates = getDates(view);
 
-                newCourse = new CourseInfo(courseName, professor, startTime, endTime, dates, location);
+                if(!checkFormFilled(courseName, professor, startButton, endButton, location)){
+                    Toast.makeText(getActivity(), "Please fill in all parts of the form", Toast.LENGTH_LONG).show();
 
-                viewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
-
-                if (currPosition > -1) {
-                    viewModel.editCourseInfo(newCourse, currPosition);
                 } else {
-                    viewModel.addCourseInfo(newCourse);
-                }
+                    newCourse = new CourseInfo(courseName, professor, startTime, endTime, dates, location);
 
-                dismiss();
+                    if (currPosition > -1) {
+                        viewModel.editCourseInfo(newCourse, currPosition);
+                    } else {
+                        viewModel.addCourseInfo(newCourse);
+                    }
+
+                    dismiss();
+                }
             }
 
         });
@@ -94,22 +101,11 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(getContext())
-                        .setTitle("Delete Confirmation")
-                        .setMessage("Are you sure you want to delete this?")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Continue with delete operation
-                                viewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
-                                if (currPosition > -1) {
-                                    viewModel.deleteCourseInfo(currPosition);
-                                }
-                                dismiss();
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, null)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
+                if (deleteButton.getText().equals("Delete")) {
+                    deleteDialog();
+                } else {
+                    dismiss();
+                }
             }
         });
 
@@ -133,29 +129,33 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
         return view;
     }
 
-    public boolean[] confirmationDialog() {
+    private boolean checkFormFilled(String courseName, String professor, Button startButton, Button endButton, String location) {
+        boolean courseFilled = !courseName.equals("");
+        boolean professorFilled = !professor.equals("");
+        boolean startButtonFilled = !startButton.equals("Start Time");
+        boolean endButtonFilled = !endButton.equals("End Time");
+        boolean locationFilled = !location.equals("");
 
-        final boolean[] returnedBoolean = new boolean[1];
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which){
-                    case DialogInterface.BUTTON_POSITIVE:
-                        returnedBoolean[0] = true;
-                        break;
+        // returns false if all of the fields are default values / empty - meaning its not filled
+        return courseFilled && professorFilled && startButtonFilled && endButtonFilled && locationFilled;
+    }
 
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        returnedBoolean[0] = false;
-                        break;
-                }
-            }
-        };
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
-        builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener).show();
-
-        return returnedBoolean;
+    private void deleteDialog() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Delete Confirmation")
+                .setMessage("Are you sure you want to delete this?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Continue with delete operation
+                        if (currPosition > -1) {
+                            viewModel.deleteCourseInfo(currPosition);
+                        }
+                        dismiss();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
 

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:backgroundTint="@color/white">
+
+    <TextView
+        android:id="@+id/assignmenttodoInputText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:labelFor="@+id/courseInputEdit"
+        android:text="@string/assignment_task_string" />
+
+    <EditText
+        android:id="@+id/assignmenttodoInputEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:autofillHints="CS2340"
+        android:hint="@string/assignment_you_need_to_complete_string"
+        android:inputType="textCapCharacters" />
+
+    <TextView
+        android:id="@+id/assignmenttodo_professorInputText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:labelFor="@+id/professorInputEdit"
+        android:text="@string/courseCard" />
+
+    <EditText
+        android:id="@+id/assignmenttodo_courseInputEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:inputType="text"
+        android:hint="@string/course_name_hint" />
+
+
+    <TextView
+        android:id="@+id/assignmenttodo_timeInputText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dueDateHeader" />
+
+    <Button
+        android:id="@+id/assignmenttodo_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/time_button_color"
+        android:text="@string/selectDate"
+        android:textColor="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/assignmenttodo_save_card_edit"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/time_button_color"
+            android:text="@string/save_card_editor"
+            android:textColor="@color/white" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="0.1" >
+        </Space>
+
+        <Button
+            android:id="@+id/assignmenttodo_cancel_card_edit"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/time_button_color"
+            android:text="@string/cancel_card_editor"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
