@@ -23,6 +23,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private Context context;
     private static final int TYPE_ASSIGNMENT = 0;
     private static final int TYPE_EXAM = 1;
+    private static final int TYPE_GENERIC = 2;
     private TodoListViewModel viewModel;
 
     public TodoListAdapter(Context context, ArrayList<TodoInfo> inputCourses, TodoListViewModel viewModel) {
@@ -34,7 +35,14 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public int getItemViewType(int position) {
         TodoInfo todoInfo = myTodoList.get(position);
-        return todoInfo.getType().equals("assignment") ? TYPE_ASSIGNMENT : TYPE_EXAM;
+        String currType = todoInfo.getType();
+        if (currType.equals("assignment")) {
+            return TYPE_ASSIGNMENT;
+        } else if (currType.equals("exam")) {
+            return TYPE_EXAM;
+        } else {
+            return TYPE_GENERIC;
+        }
     }
 
     @NonNull
@@ -44,9 +52,12 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (viewType == TYPE_ASSIGNMENT) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.assignment_card_layout, parent, false);
             return new AssignmentViewHolder(view, context, myTodoList);
-        } else {
+        } else if (viewType == TYPE_EXAM) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.exam_card_layout, parent, false);
             return new ExamViewHolder(view, context, myTodoList);
+        } else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.generic_card_layout, parent, false);
+            return new GenericViewHolder(view, context, myTodoList);
         }
     }
 
@@ -56,9 +67,12 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (getItemViewType(position) == TYPE_ASSIGNMENT) {
             ((AssignmentViewHolder) holder).bindData(todoInfo, position);
             checkIfFiltered(holder, TYPE_ASSIGNMENT, todoInfo.isCompleted());
-        } else {
+        } else if (getItemViewType(position) == TYPE_EXAM) {
             ((ExamViewHolder) holder).bindData(todoInfo, position);
             checkIfFiltered(holder, TYPE_EXAM, todoInfo.isCompleted());
+        } else {
+            ((GenericViewHolder) holder).bindData(todoInfo, position);
+            checkIfFiltered(holder, TYPE_GENERIC, todoInfo.isCompleted());
         }
     }
 
@@ -71,8 +85,9 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         boolean assignmentFiltered = viewModel.getAssignmentFilter() && (todoType == TYPE_ASSIGNMENT);
         boolean examFiltered = (todoType == TYPE_EXAM) && (viewModel.getExamFilter());
         boolean completionFiltered = viewModel.getCompletedFilter() && todoCompleted;
+        boolean genericFiltered = viewModel.getGenericFilter() && (todoType == TYPE_GENERIC);
 
-        if (assignmentFiltered || examFiltered || completionFiltered) {
+        if (assignmentFiltered || examFiltered || completionFiltered || genericFiltered) {
             newHolder.itemView.setVisibility(View.INVISIBLE);
             newHolder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
         } else {
@@ -159,6 +174,47 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             editButton.setOnClickListener(v -> {
                 FragmentActivity activity = (FragmentActivity) context;
                 TodoEditorFragment todoEditorFragment = TodoEditorFragment.newInstance(todoList, getAdapterPosition(), "exam");
+                todoEditorFragment.show(activity.getSupportFragmentManager(), todoEditorFragment.getTag());
+            });
+
+            // Added
+            todoCheckbox.setOnClickListener(v -> {
+                boolean isChecked = todoCheckbox.isChecked();
+                currTodoInfo.setCompleted(isChecked);
+                if (context instanceof FragmentActivity) {
+                    TodoListViewModel viewModel = new ViewModelProvider((FragmentActivity) context).get(TodoListViewModel.class);
+                    viewModel.updateTodoCompletion(currTodoInfo, position);
+                }
+            });
+        }
+    }
+
+    static class GenericViewHolder extends RecyclerView.ViewHolder {
+        private TextView name, date;
+        private ImageButton editButton;
+        private ArrayList<TodoInfo> todoList;
+        private Context context;
+        private CheckBox todoCheckbox; // Added
+
+
+        public GenericViewHolder(View itemView, Context context, ArrayList<TodoInfo> todoList) {
+            super(itemView);
+            this.context = context;
+            this.todoList = todoList;
+            name = itemView.findViewById(R.id.generic_todo_card_name);
+            date = itemView.findViewById(R.id.generic_todo_card_date);
+            editButton = itemView.findViewById(R.id.generic_todo_edit_button);
+            todoCheckbox = itemView.findViewById(R.id.genericTodoCheckBox); // Added
+        }
+
+        void bindData(TodoInfo currTodoInfo, int position) {
+            name.setText(currTodoInfo.getTodoName());
+            date.setText(currTodoInfo.getDate());
+            todoCheckbox.setChecked(currTodoInfo.isCompleted()); // Added
+
+            editButton.setOnClickListener(v -> {
+                FragmentActivity activity = (FragmentActivity) context;
+                TodoEditorFragment todoEditorFragment = TodoEditorFragment.newInstance(todoList, getAdapterPosition(), "generic task");
                 todoEditorFragment.show(activity.getSupportFragmentManager(), todoEditorFragment.getTag());
             });
 

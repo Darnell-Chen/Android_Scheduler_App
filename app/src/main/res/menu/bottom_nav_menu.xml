@@ -10,12 +10,4 @@
         android:id="@+id/todo_list_dashboard"
         android:icon="@drawable/ic_checklist_24"
         android:title="@string/todo_list" />
-
-    <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/title_notifications" />
-
-
-
 </menu>

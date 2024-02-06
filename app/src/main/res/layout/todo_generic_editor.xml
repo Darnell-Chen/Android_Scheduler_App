@@ -9,44 +9,28 @@
     android:backgroundTint="@color/white">
 
     <TextView
-        android:id="@+id/assignmenttodoInputText"
+        android:id="@+id/generictodoInputText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:labelFor="@+id/courseInputEdit"
-        android:text="@string/assignment_task_string" />
+        android:text="@string/task" />
 
     <EditText
-        android:id="@+id/assignmenttodoInputEdit"
+        android:id="@+id/generictodoInputEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:autofillHints="CS2340"
-        android:hint="@string/assignment_you_need_to_complete_string"/>
+        android:hint="@string/enter_task"/>
 
     <TextView
-        android:id="@+id/assignmenttodo_professorInputText"
+        android:id="@+id/generictodo_timeInputText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:labelFor="@+id/professorInputEdit"
-        android:text="@string/courseCard" />
-
-    <EditText
-        android:id="@+id/assignmenttodo_courseInputEdit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:inputType="text"
-        android:hint="@string/course_name_hint" />
-
-
-    <TextView
-        android:id="@+id/assignmenttodo_timeInputText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/dueDateHeader" />
+        android:text="@string/complete_by" />
 
     <Button
-        android:id="@+id/assignmenttodo_date"
+        android:id="@+id/generictodo_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -60,7 +44,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/assignmenttodo_save_card_edit"
+            android:id="@+id/generictodo_save_card_edit"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,7 +59,7 @@
         </Space>
 
         <Button
-            android:id="@+id/assignmenttodo_cancel_card_edit"
+            android:id="@+id/generictodo_cancel_card_edit"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

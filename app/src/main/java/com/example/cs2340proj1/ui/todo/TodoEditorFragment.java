@@ -32,6 +32,7 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
     TodoListViewModel viewModel;
     int currPosition = -1;
 
+
     public TodoEditorFragment() {
     }
 
@@ -49,10 +50,24 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {Bundle args = getArguments();
-        String type = args != null ? args.getString("type", "assignment") : "assignment";
-        int layoutId = type.equals("assignment") ? R.layout.todo_assignment_editor : R.layout.todo_exam_editor;
-        View view = inflater.inflate(layoutId, container, false);
+//        String type = args != null ? args.getString("type", "assignment") : "assignment";
+        String type;
+        if (args !=null) {
+            type = args.getString("type");
+        } else {
+            type = "assignment";
+        }
 
+        int layoutId;
+        if (type.equals("assignment")) {
+            layoutId = R.layout.todo_assignment_editor;
+        } else if (type.equals("exam")){
+            layoutId = R.layout.todo_exam_editor;
+        } else {
+            layoutId = R.layout.todo_generic_editor;
+        }
+
+        View view = inflater.inflate(layoutId, container, false);
         viewModel = new ViewModelProvider(requireActivity()).get(TodoListViewModel.class);
 
         // always have this before setLayout() since this will find the components that setLayout uses
@@ -73,7 +88,7 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
 
                 String todoName = nameEdit.getText().toString();
                 String date = dateButton.getText().toString();
-                String course = courseEdit.getText().toString();
+                String course = (type.equals("assignment") || type.equals("exam")) ? courseEdit.getText().toString() : "";
                 String location = (type.equals("exam")) ? locationEdit.getText().toString() : "";
 
                 if(!checkFormFilled(type, todoName, date, course, location)){
@@ -120,8 +135,10 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
     private boolean checkFormFilled(String type, String todoName, String date, String course, String location) {
         if (type.equals("assignment")) {
             return !todoName.equals("") && !date.equals("Select Date") && !course.equals("");
-        } else {
+        } else if (type.equals("exam")){
             return !todoName.equals("") && !date.equals("Select Date") && !course.equals("") && !location.equals("");
+        } else {
+            return !todoName.equals("") && !date.equals("Select Date");
         }
     }
 
@@ -147,7 +164,7 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
 
     private void setLayout(TodoInfo currTodo, String type) {
         nameEdit.setText(currTodo.getTodoName());
-        courseEdit.setText(currTodo.getCourse());
+//        courseEdit.setText(currTodo.getCourse());
         dateButton.setText(currTodo.getDate());
 
         // Handle location field for exams
@@ -155,6 +172,12 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
             locationEdit.setText(currTodo.getLocation());
         } else if (locationEdit != null) {
             locationEdit.setVisibility(View.GONE);
+        }
+
+        if (type.equals("exam") || type.equals("assignment")) {
+            courseEdit.setText(currTodo.getCourse());
+        } else if (courseEdit != null) {
+            courseEdit.setVisibility(View.GONE);
         }
 
         deleteButton.setText("Delete");
@@ -168,7 +191,7 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
 
             nameEdit = view.findViewById(R.id.assignmenttodoInputEdit);
             courseEdit = view.findViewById(R.id.assignmenttodo_courseInputEdit);
-        } else {
+        } else if (type.equals("exam")){
             addButton = view.findViewById(R.id.examtodo_save_card_edit);
             deleteButton = view.findViewById(R.id.examtodo_cancel_card_edit);
             dateButton = view.findViewById(R.id.examtodo_date);
@@ -176,6 +199,12 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
             nameEdit = view.findViewById(R.id.examtodoInputEdit);
             courseEdit = view.findViewById(R.id.examtodo_courseInputEdit);
             locationEdit = view.findViewById(R.id.examtodo_locationInputEdit);
+        } else {
+            addButton = view.findViewById(R.id.generictodo_save_card_edit);
+            deleteButton = view.findViewById(R.id.generictodo_cancel_card_edit);
+            dateButton = view.findViewById(R.id.generictodo_date);
+
+            nameEdit = view.findViewById(R.id.generictodoInputEdit);
         }
     }
 

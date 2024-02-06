@@ -84,7 +84,7 @@ public class TodoListFragment extends Fragment {
     }
 
     private void showAddTodoOptions() {
-        CharSequence[] options = new CharSequence[]{"Add Assignment", "Add Exam"};
+        CharSequence[] options = new CharSequence[]{"Add Assignment", "Add Exam", "Add Generic"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Choose an option");
@@ -93,8 +93,10 @@ public class TodoListFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 if (which == 0) {
                     openTodoEditor("assignment");
-                } else {
+                } else if (which == 1){
                     openTodoEditor("exam");
+                } else {
+                    openTodoEditor("generic");
                 }
             }
         });
@@ -110,6 +112,7 @@ public class TodoListFragment extends Fragment {
         todoFilterFragment = new TodoFilterFragment();
         todoFilterFragment.show(getParentFragmentManager(), todoFilterFragment.getTag());
     }
+
 
     @Override
     public void onDestroyView() {

@@ -63,6 +63,17 @@
         android:text="Filter Out Assignments"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
+    <Switch
+        android:id="@+id/genericSwitch"
+        android:paddingTop="15dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Filter Out Generic Tasks"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
 
     <LinearLayout
         android:paddingTop="30dp"

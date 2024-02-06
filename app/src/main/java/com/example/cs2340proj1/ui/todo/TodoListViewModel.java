@@ -9,7 +9,7 @@ import java.util.Collections;
 
 public class TodoListViewModel extends ViewModel {
     private MutableLiveData<ArrayList<TodoInfo>> todoList = new MutableLiveData<ArrayList<TodoInfo>>();
-    private boolean completedFilter , dateFilter, courseFilter, examFilter, assignmentFilter = false;
+    private boolean completedFilter , dateFilter, courseFilter, examFilter, assignmentFilter, genericFilter = false;
 
     public LiveData<ArrayList<TodoInfo>> getTodoList() {
         return todoList;
@@ -61,11 +61,9 @@ public class TodoListViewModel extends ViewModel {
 
     public void setCompletedFilter(boolean completed) {
         this.completedFilter = completed;
-        if (completed) {
-            ArrayList<TodoInfo> currentList = todoList.getValue();
-            Collections.sort(currentList, new DateSort());
-            todoList.setValue(currentList);
-        }
+        ArrayList<TodoInfo> currentList = todoList.getValue();
+        Collections.sort(currentList, new DateSort());
+        todoList.setValue(currentList);
     }
 
     public void setDateFilter(boolean date) {
@@ -96,6 +94,11 @@ public class TodoListViewModel extends ViewModel {
         todoList.setValue(todoList.getValue());
     }
 
+    public void setGenericFilter(boolean generic) {
+        this.genericFilter = generic;
+        todoList.setValue(todoList.getValue());
+    }
+
     public boolean getDateFilter() {
         return dateFilter;
     }
@@ -115,4 +118,9 @@ public class TodoListViewModel extends ViewModel {
     public boolean getAssignmentFilter() {
         return assignmentFilter;
     }
+
+    public boolean getGenericFilter() {
+        return genericFilter;
+    }
+
 }

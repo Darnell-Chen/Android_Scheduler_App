@@ -23,9 +23,9 @@ import java.util.Collections;
 public class TodoFilterFragment extends BottomSheetDialogFragment{
 
     private TodoListViewModel viewModel;
-    Switch completionSwitch, courseSwitch, dateSwitch, examSwitch, assignmentSwitch;
+    Switch completionSwitch, courseSwitch, dateSwitch, examSwitch, assignmentSwitch, genericSwitch;
 
-    boolean initialCompletion, initialCourse, initialDate, initialExam, initialAssignment;
+    boolean initialCompletion, initialCourse, initialDate, initialExam, initialAssignment, initialGeneric;
     Button filterButton;
     public TodoFilterFragment() {
     }
@@ -57,6 +57,7 @@ public class TodoFilterFragment extends BottomSheetDialogFragment{
         this.dateSwitch = view.findViewById(R.id.dateSwitch);
         this.examSwitch = view.findViewById(R.id.examSwitch);
         this.assignmentSwitch = view.findViewById(R.id.assignmentSwitch);
+        this.genericSwitch = view.findViewById(R.id.genericSwitch);
 
         // this will toggle on/off the switches based on previous inputs that the user already had
         setSwitches();
@@ -73,12 +74,14 @@ public class TodoFilterFragment extends BottomSheetDialogFragment{
         initialCompletion = viewModel.getCompletedFilter();
         initialExam = viewModel.getExamFilter();
         initialAssignment = viewModel.getAssignmentFilter();
+        initialGeneric = viewModel.getGenericFilter();
 
         dateSwitch.setChecked(initialDate);
         courseSwitch.setChecked(initialCourse);
         completionSwitch.setChecked(initialCompletion);
         examSwitch.setChecked(initialExam);
         assignmentSwitch.setChecked(initialAssignment);
+        genericSwitch.setChecked(initialGeneric);
     }
 
     private void filteringTodo() {
@@ -86,11 +89,17 @@ public class TodoFilterFragment extends BottomSheetDialogFragment{
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    if (buttonView != examSwitch) {
-                        examSwitch.setChecked(false);
-                    }
-                    if (buttonView != assignmentSwitch) {
+                    if (examSwitch.isChecked() && genericSwitch.isChecked()) {
                         assignmentSwitch.setChecked(false);
+                    }
+                    if (examSwitch.isChecked() && assignmentSwitch.isChecked()) {
+                        genericSwitch.setChecked(false);
+                    }
+                    if (buttonView == assignmentSwitch) {
+                        if (examSwitch.isChecked() && genericSwitch.isChecked()) {
+                            genericSwitch.setChecked(false);
+                        }
+                        assignmentSwitch.setChecked(isChecked);
                     }
                 }
             }
@@ -98,6 +107,8 @@ public class TodoFilterFragment extends BottomSheetDialogFragment{
 
         examSwitch.setOnCheckedChangeListener(changeChecker);
         assignmentSwitch.setOnCheckedChangeListener(changeChecker);
+        genericSwitch.setOnCheckedChangeListener(changeChecker);
+
     }
 
 
@@ -107,12 +118,20 @@ public class TodoFilterFragment extends BottomSheetDialogFragment{
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    if (buttonView != courseSwitch) {
-                        courseSwitch.setChecked(false);
-                    }
-                    if (buttonView != dateSwitch) {
+                    if (courseSwitch.isChecked()) {
                         dateSwitch.setChecked(false);
+                        genericSwitch.setChecked(true);
                     }
+                    if (buttonView == dateSwitch) {
+                        if (courseSwitch.isChecked() && genericSwitch.isChecked()) {
+                            courseSwitch.setChecked(false);
+                            genericSwitch.setChecked(false);
+                            dateSwitch.setChecked(true);
+                        } else if (dateSwitch.isChecked()) {
+                            courseSwitch.setChecked(false);
+                        }
+                    }
+
                 }
             }
         };
@@ -138,11 +157,12 @@ public class TodoFilterFragment extends BottomSheetDialogFragment{
             viewModel.setExamFilter(examSwitch.isChecked());
         }
 
-        System.out.println("initial value: " + initialAssignment);
-        System.out.println("new value: " + assignmentSwitch.isChecked());
-
         if (initialAssignment != assignmentSwitch.isChecked()) {
             viewModel.setAssignmentFilter(assignmentSwitch.isChecked());
+        }
+
+        if (initialGeneric != genericSwitch.isChecked()) {
+            viewModel.setGenericFilter(genericSwitch.isChecked());
         }
     }
 }

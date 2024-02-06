@@ -37,6 +37,10 @@
     <string name="selectDate">Select Date</string>
     <string name="exam_name">Exam Name</string>
     <string name="Completed_String">Completed:</string>
+    <string name="complete_by">Completed By</string>
+    <string name="task">Task</string>
+    <string name="enter_task">Enter Task</string>
+    <string name="task_1">TASK</string>
 
 
 </resources>
