@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -79,15 +80,20 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
 
                 String[] dates = getDates(view);
 
-                newCourse = new CourseInfo(courseName, professor, startTime, endTime, dates, location);
+                if(!checkFormFilled(courseName, professor, startButton, endButton, location)){
+                    Toast.makeText(getActivity(), "Please fill in all parts of the form", Toast.LENGTH_LONG).show();
 
-                if (currPosition > -1) {
-                    viewModel.editCourseInfo(newCourse, currPosition);
                 } else {
-                    viewModel.addCourseInfo(newCourse);
-                }
+                    newCourse = new CourseInfo(courseName, professor, startTime, endTime, dates, location);
 
-                dismiss();
+                    if (currPosition > -1) {
+                        viewModel.editCourseInfo(newCourse, currPosition);
+                    } else {
+                        viewModel.addCourseInfo(newCourse);
+                    }
+
+                    dismiss();
+                }
             }
 
         });
@@ -121,6 +127,17 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
         });
 
         return view;
+    }
+
+    private boolean checkFormFilled(String courseName, String professor, Button startButton, Button endButton, String location) {
+        boolean courseFilled = !courseName.equals("");
+        boolean professorFilled = !professor.equals("");
+        boolean startButtonFilled = !startButton.equals("Start Time");
+        boolean endButtonFilled = !endButton.equals("End Time");
+        boolean locationFilled = !location.equals("");
+
+        // returns false if all of the fields are default values / empty - meaning its not filled
+        return courseFilled && professorFilled && startButtonFilled && endButtonFilled && locationFilled;
     }
 
     private void deleteDialog() {
