@@ -72,10 +72,6 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         boolean examFiltered = (todoType == TYPE_EXAM) && (viewModel.getExamFilter());
         boolean completionFiltered = viewModel.getCompletedFilter() && todoCompleted;
 
-        System.out.println("get Assignment Filter = " + viewModel.getAssignmentFilter());
-        System.out.println("get Exam Filter = " + viewModel.getExamFilter());
-        System.out.println("Todo Type: " + todoType);
-
         if (assignmentFiltered || examFiltered || completionFiltered) {
             newHolder.itemView.setVisibility(View.INVISIBLE);
             newHolder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));

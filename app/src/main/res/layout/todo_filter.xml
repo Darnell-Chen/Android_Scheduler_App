@@ -49,7 +49,7 @@
         android:paddingRight="100dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Show Exam Only"
+        android:text="Filter Out Exams"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <Switch
@@ -60,7 +60,7 @@
         android:paddingRight="100dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Show Assignment Only"
+        android:text="Filter Out Assignments"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 

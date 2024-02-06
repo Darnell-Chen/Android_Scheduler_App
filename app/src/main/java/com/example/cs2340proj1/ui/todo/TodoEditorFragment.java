@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.app.DatePickerDialog;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -75,15 +76,20 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
                 String course = courseEdit.getText().toString();
                 String location = (type.equals("exam")) ? locationEdit.getText().toString() : "";
 
-                newTodo = new TodoInfo(todoName, date, course, location, type);
+                if(!checkFormFilled(type, todoName, date, course, location)){
+                    Toast.makeText(getActivity(), "Please fill in all parts of the form", Toast.LENGTH_LONG).show();
 
-                if (currPosition > -1) {
-                    viewModel.editTodoInfo(newTodo, currPosition);
                 } else {
-                    viewModel.addTodoInfo(newTodo);
-                }
+                    newTodo = new TodoInfo(todoName, date, course, location, type);
 
-                dismiss();
+                    if (currPosition > -1) {
+                        viewModel.editTodoInfo(newTodo, currPosition);
+                    } else {
+                        viewModel.addTodoInfo(newTodo);
+                    }
+
+                    dismiss();
+                }
             }
 
         });
@@ -109,6 +115,14 @@ public class TodoEditorFragment extends BottomSheetDialogFragment {
 
 
         return view;
+    }
+
+    private boolean checkFormFilled(String type, String todoName, String date, String course, String location) {
+        if (type.equals("assignment")) {
+            return !todoName.equals("") && !date.equals("Select Date") && !course.equals("");
+        } else {
+            return !todoName.equals("") && !date.equals("Select Date") && !course.equals("") && !location.equals("");
+        }
     }
 
 
