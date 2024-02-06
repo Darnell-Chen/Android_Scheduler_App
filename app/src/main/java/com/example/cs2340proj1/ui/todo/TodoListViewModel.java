@@ -61,6 +61,11 @@ public class TodoListViewModel extends ViewModel {
 
     public void setCompletedFilter(boolean completed) {
         this.completedFilter = completed;
+        if (completed) {
+            ArrayList<TodoInfo> currentList = todoList.getValue();
+            Collections.sort(currentList, new DateSort());
+            todoList.setValue(currentList);
+        }
     }
 
     public void setDateFilter(boolean date) {

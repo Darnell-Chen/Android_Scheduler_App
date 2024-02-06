@@ -36,6 +36,7 @@
     <string name="exam_date">Exam Date</string>
     <string name="selectDate">Select Date</string>
     <string name="exam_name">Exam Name</string>
+    <string name="Completed_String">Completed:</string>
 
 
 </resources>

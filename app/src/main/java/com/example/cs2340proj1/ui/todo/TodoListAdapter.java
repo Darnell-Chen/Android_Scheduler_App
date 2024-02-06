@@ -58,7 +58,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             checkIfFiltered(holder, TYPE_ASSIGNMENT, todoInfo.isCompleted());
         } else {
             ((ExamViewHolder) holder).bindData(todoInfo, position);
-            checkIfFiltered(holder, TYPE_ASSIGNMENT, todoInfo.isCompleted());
+            checkIfFiltered(holder, TYPE_EXAM, todoInfo.isCompleted());
         }
     }
 
@@ -68,8 +68,15 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void checkIfFiltered(RecyclerView.ViewHolder newHolder, int todoType, boolean todoCompleted) {
-        System.out.println("my viewmodel assignment return " + viewModel.getAssignmentFilter());
-        if (viewModel.getAssignmentFilter() && (todoType == TYPE_ASSIGNMENT)) {
+        boolean assignmentFiltered = viewModel.getAssignmentFilter() && (todoType == TYPE_ASSIGNMENT);
+        boolean examFiltered = (todoType == TYPE_EXAM) && (viewModel.getExamFilter());
+        boolean completionFiltered = viewModel.getCompletedFilter() && todoCompleted;
+
+        System.out.println("get Assignment Filter = " + viewModel.getAssignmentFilter());
+        System.out.println("get Exam Filter = " + viewModel.getExamFilter());
+        System.out.println("Todo Type: " + todoType);
+
+        if (assignmentFiltered || examFiltered || completionFiltered) {
             newHolder.itemView.setVisibility(View.INVISIBLE);
             newHolder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
         } else {
@@ -77,23 +84,6 @@ public class TodoListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             newHolder.itemView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
     }
-
-//    private void checkIfFiltered(RecyclerView.ViewHolder newHolder, int todoType, boolean todoCompleted) {
-//
-//        checkIfFilteredHelper(viewModel.getAssignmentFilter(), (todoType == TYPE_ASSIGNMENT), newHolder);
-//        checkIfFilteredHelper(viewModel.getExamFilter(), (todoType == TYPE_EXAM), newHolder);
-//        checkIfFilteredHelper(viewModel.getCompletedFilter(), todoCompleted, newHolder);
-//    }
-//
-//    private void checkIfFilteredHelper(boolean bool_1, boolean bool_2, RecyclerView.ViewHolder newHolder) {
-//        if (bool_1 && bool_2) {
-//            newHolder.itemView.setVisibility(View.INVISIBLE);
-//            newHolder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
-//        } else {
-//            newHolder.itemView.setVisibility(View.VISIBLE);
-//            newHolder.itemView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-//        }
-//    }
 
     public void setTodoList(ArrayList<TodoInfo> newList) {
         myTodoList = newList;
