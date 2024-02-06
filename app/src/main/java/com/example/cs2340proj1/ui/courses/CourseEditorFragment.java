@@ -173,11 +173,11 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
 
         // Added to remember days of the week when editing card
         String[] dates = currCourse.getDate();
-        monSwitch.setChecked(dates[0].trim().equals("Mon"));
-        tuesSwitch.setChecked(dates[1].trim().equals("Tues"));
-        wedSwitch.setChecked(dates[2].trim().equals("Wed"));
-        thurSwitch.setChecked(dates[3].trim().equals("Thurs"));
-        friSwitch.setChecked(dates[4].trim().equals("Fri"));
+        monSwitch.setChecked(dates[0].trim().equals("M"));
+        tuesSwitch.setChecked(dates[1].trim().equals("T"));
+        wedSwitch.setChecked(dates[2].trim().equals("W"));
+        thurSwitch.setChecked(dates[3].trim().equals("Th"));
+        friSwitch.setChecked(dates[4].trim().equals("F"));
 
         deleteButton.setText("Delete");
     }
@@ -204,21 +204,21 @@ public class CourseEditorFragment extends BottomSheetDialogFragment {
     private String[] getDates(View view) {
         String[] dates = new String[5];
 
-        Switch monSwitch = view.findViewById(R.id.mon_switch);
-        Switch tuesSwitch = view.findViewById(R.id.tue_switch);
-        Switch wedSwitch = view.findViewById(R.id.wed_switch);
-        Switch thurSwitch = view.findViewById(R.id.thur_switch);
-        Switch friSwitch = view.findViewById(R.id.fri_switch);
+        monSwitch = view.findViewById(R.id.mon_switch);
+        tuesSwitch = view.findViewById(R.id.tue_switch);
+        wedSwitch = view.findViewById(R.id.wed_switch);
+        thurSwitch = view.findViewById(R.id.thur_switch);
+        friSwitch = view.findViewById(R.id.fri_switch);
 
 
         // ternary operators where 1 = true, 0 = false
         // depending on if the switch for that date is on or off, each element in the string
         // is set to 0 or 1
-        dates[0] = (monSwitch.isChecked()) ? " Mon " : "";
-        dates[1] = (tuesSwitch.isChecked()) ? " Tues " : "";
-        dates[2] = (wedSwitch.isChecked()) ? " Wed " : "";
-        dates[3] = (thurSwitch.isChecked()) ? " Thurs " : "";
-        dates[4] = (friSwitch.isChecked()) ? " Fri " : "";
+        dates[0] = (monSwitch.isChecked()) ? " M " : "";
+        dates[1] = (tuesSwitch.isChecked()) ? " T " : "";
+        dates[2] = (wedSwitch.isChecked()) ? " W " : "";
+        dates[3] = (thurSwitch.isChecked()) ? " Th " : "";
+        dates[4] = (friSwitch.isChecked()) ? " F " : "";
 
         return dates;
     }
