@@ -1,1 +1,3 @@
-Made by Darnell Chen and Ben Davidson - students of Georgia Institute of Technology
+Made by Darnell Chen and Ben Davidson @ Georgia Institute of Technology
+
+
